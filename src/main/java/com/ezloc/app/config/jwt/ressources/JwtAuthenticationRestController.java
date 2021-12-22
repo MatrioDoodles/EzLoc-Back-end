@@ -1,4 +1,4 @@
-package com.ezloc.app.jwt.ressources;
+package com.ezloc.app.config.jwt.ressources;
 
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ezloc.app.jwt.JwtTokenUtil;
+import com.ezloc.app.config.jwt.JwtTokenUtil;
 import com.ezloc.app.entities.User;
 
 @RestController

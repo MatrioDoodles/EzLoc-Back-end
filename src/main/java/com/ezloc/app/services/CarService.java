@@ -2,9 +2,9 @@ package com.ezloc.app.services;
 
 
 import com.ezloc.app.repositories.CarRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public interface CarService extends CarRepository {
+@Service
+public class CarService {
 
 }

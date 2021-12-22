@@ -1,4 +1,4 @@
 package com.ezloc.app.services;
 
-public interface HistoryService {
+public class HistoryService {
 }

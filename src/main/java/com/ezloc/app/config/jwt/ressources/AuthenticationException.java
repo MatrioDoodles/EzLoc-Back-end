@@ -1,4 +1,4 @@
-package com.ezloc.app.jwt.ressources;
+package com.ezloc.app.config.jwt.ressources;
 public class AuthenticationException extends RuntimeException {
     /**
 	 * 

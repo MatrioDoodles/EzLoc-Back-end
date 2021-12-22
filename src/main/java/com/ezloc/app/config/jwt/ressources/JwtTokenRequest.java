@@ -1,4 +1,4 @@
-package com.ezloc.app.jwt.ressources;
+package com.ezloc.app.config.jwt.ressources;
 
 import java.io.Serializable;
 

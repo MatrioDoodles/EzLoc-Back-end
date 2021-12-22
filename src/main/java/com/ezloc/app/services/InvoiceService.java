@@ -1,4 +1,4 @@
 package com.ezloc.app.services;
 
-public interface InvoiceService {
+public class InvoiceService {
 }

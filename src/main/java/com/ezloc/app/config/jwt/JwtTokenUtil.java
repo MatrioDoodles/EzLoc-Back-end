@@ -1,4 +1,4 @@
-package com.ezloc.app.jwt;
+package com.ezloc.app.config.jwt;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
 package com.ezloc.app.services;
 
-public interface ReservationService {
+public class ReservationService {
 }
