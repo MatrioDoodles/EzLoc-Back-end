@@ -12,14 +12,6 @@ public class EzLocApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EzLocApplication.class, args);
 	}
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("*").allowedOrigins("http://localhost:9000");
-			}
-		};
-	}
+
 
 }
