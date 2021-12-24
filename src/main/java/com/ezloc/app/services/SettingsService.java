@@ -1,4 +1,4 @@
 package com.ezloc.app.services;
 
-public class SettingsService {
+public interface SettingsService {
 }

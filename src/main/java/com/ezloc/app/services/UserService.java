@@ -1,4 +1,4 @@
 package com.ezloc.app.services;
 
-public class UserService {
+public interface UserService {
 }

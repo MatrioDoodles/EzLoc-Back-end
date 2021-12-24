@@ -2,22 +2,24 @@ package com.ezloc.app.entities;
 
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name="reservation")
-@Getter
-@Setter
+@Data
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Reservation {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "reservation_sequence",sequenceName = "reservation_sequence",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "reservation_sequence")
     @Column(name="ID_RESERVATION", unique = true)
-    private long id;
+    private Long id;
     private String reservationID;
     private Date date;
 

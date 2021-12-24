@@ -1,4 +1,5 @@
 package com.ezloc.app.services;
 
-public class ClientService {
+
+public interface ClientService {
 }

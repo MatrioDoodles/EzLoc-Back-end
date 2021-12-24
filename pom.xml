@@ -96,6 +96,16 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.8.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>29.0-jre</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.hudson.main</groupId>
+			<artifactId>hudson-rest-common</artifactId>
+			<version>3.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

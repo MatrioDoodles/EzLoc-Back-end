@@ -1,44 +1,51 @@
 package com.ezloc.app.controllers;
 
 
+import com.ezloc.app.config.RestPreconditions;
 import com.ezloc.app.entities.Car;
 import com.ezloc.app.repositories.CarRepository;
+import com.ezloc.app.services.CarService;
+import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/cars")
 public class CarController {
 
     @Autowired
-    private CarRepository carRepository;
+    private CarService carService;
+
     @GetMapping
     public List<Car> findAll() {
-        return carRepository.findAll();
+        return carService.findAll();
     }
-    @GetMapping(value = “/{id}”)
-    public Car findById(@PathVariable(“id”) Long id) {
-        return RestPreconditions.checkFound(carRepository.findById(id));
+    @GetMapping(value = "/{id}")
+    public Optional<Car> findById(@PathVariable("id") Long id) {
+        RestPreconditions.checkNotNull(carService.findById(id),"Car Not Found");
+        return carService.findById(id);
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody Car resource) {
-        Preconditions.checkNotNull(resource);
-        return carRepository.create(resource);
+    public Car create(@RequestBody Car resource) {
+        Preconditions.checkNotNull(resource,"Populate all infos");
+        return carService.add(resource);
     }
-    @PutMapping(value = “/{id}”)
+    @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable( “id” ) Long id, @RequestBody Car resource) {
+    public void update(@PathVariable("id") Long id, @RequestBody Car resource) {
         Preconditions.checkNotNull(resource);
-        RestPreconditions.checkNotNull(carRepository.getById(resource.getId()));
-        carRepository.update(resource);
+        RestPreconditions.checkNotNull(carService.findById(resource.getId()),"Car Not Found");
+        carService.update(resource);
     }
-    @DeleteMapping(value = “/{id}”)
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable(“id”) Long id) {
-        carRepository.deleteById(id);
+    public void delete(@PathVariable("id") Long id) {
+        carService.delete(id);
     }
 }

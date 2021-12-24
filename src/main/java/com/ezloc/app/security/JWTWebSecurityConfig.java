@@ -1,9 +1,10 @@
-package com.ezloc.app.config.jwt;
+package com.ezloc.app.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -60,13 +61,8 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/products/GetAllProducts","/products/img/**"
-            		,"/orders/addOrder","/orders/order","/categories/GetAllCategorys",
-            		"/products/GetProductsByLabel/**","/products/**","/comments/GetAllCommentsByProduct/**",
-            		"/comments/addComment","/products/GetRandomProducts","/comments/GetAllCommentsByProductApprouved/**",
-            		"/comments/addComment"
-            		).permitAll()
-            .anyRequest().authenticated();
+            .antMatchers("*").permitAll();
+            //.anyRequest().authenticated();
 
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);

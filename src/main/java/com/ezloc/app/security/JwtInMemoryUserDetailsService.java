@@ -1,4 +1,4 @@
-package com.ezloc.app.config.jwt;
+package com.ezloc.app.security;
 
 import java.util.ArrayList;
 import java.util.List;

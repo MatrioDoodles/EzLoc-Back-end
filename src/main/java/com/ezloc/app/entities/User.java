@@ -7,10 +7,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,8 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="user")
-@Getter
-@Setter
+@Data
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
@@ -32,10 +30,11 @@ public class User implements UserDetails {
 	 * 
 	 */
 	private static final long serialVersionUID = 7325751389645179303L;
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@SequenceGenerator(name = "user_sequence",sequenceName = "user_sequence",allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_sequence")
 	@Column(name="ID_USER", unique = true)
-	private long id;
+	private Long id;
 	private String name;
 	private String surname;
 	@Column(name="MAIL", unique = true)
