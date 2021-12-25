@@ -21,11 +21,11 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 
   static List<User> userList = new ArrayList<>();
   @Autowired
-  private UserRepository UserRepository;
+  private UserRepository userRepository;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-	  userList = UserRepository.findAll();
+	  userList = userRepository.findAll();
     Optional<User> findFirst = userList.stream()
         .filter(user -> user.getUsername().equals(username)).findFirst();
 

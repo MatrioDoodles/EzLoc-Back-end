@@ -21,6 +21,7 @@ public class Invoice {
     private Long id;
     private String checkoutType;
     private boolean paid;
+    private String code;
     private String invoiceFile;
 
     @OneToOne(mappedBy = "invoice")

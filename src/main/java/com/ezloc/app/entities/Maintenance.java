@@ -30,7 +30,7 @@ public class Maintenance {
     private boolean  assurancePaid;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_CAR", referencedColumnName = "id")
+    @JoinColumn(name = "ID_CAR", referencedColumnName = "ID_CAR")
     private Car car;
 
 }

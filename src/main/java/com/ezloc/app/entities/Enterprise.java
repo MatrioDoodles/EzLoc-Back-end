@@ -24,8 +24,16 @@ public class Enterprise {
     private String name;
     private String description;
     private String phone;
+    private String bank;
+    private String mail;
+    private String website;
+    private String landLineNumber;
+    private String fax;
     private String adress;
-
+    private String registryNumber;
+    private String fiscalId;
+    private String city;
+    private String immatriculation;
 
     @OneToOne(mappedBy = "enterprise")
     private Settings settings;

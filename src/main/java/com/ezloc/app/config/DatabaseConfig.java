@@ -1,4 +1,4 @@
-package com.ezloc.app.config;
+/*package com.ezloc.app.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -21,4 +21,4 @@ public class DatabaseConfig {
         return new HikariDataSource(config);
     }
 
-}
+}*/

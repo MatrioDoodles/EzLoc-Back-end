@@ -27,8 +27,8 @@ public class CarController {
     }
     @GetMapping(value = "/{id}")
     public Optional<Car> findById(@PathVariable("id") Long id) {
-        RestPreconditions.checkNotNull(carService.findById(id),"Car Not Found");
-        return carService.findById(id);
+
+        return RestPreconditions.checkNotNull(carService.findById(id),"Car Not Found");//carService.findById(id);
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

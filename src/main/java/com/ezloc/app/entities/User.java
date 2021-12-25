@@ -44,18 +44,19 @@ public class User implements UserDetails {
 	private String username;
 	private String password;
 	private String city;
-	private String Salary;
+	private boolean activated;
+
 	@Transient
 	@Getter(onMethod_ = @JsonIgnore)
 	private Collection<? extends GrantedAuthority> authorities;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="ID_ROLE")
 	private Role role;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ENTERPRISE")
 	private Enterprise enterprise;
 	@OneToMany(mappedBy = "user")
-	private History history;
+	private Set<History> histories;
 
 	@JsonIgnore
 	@Override

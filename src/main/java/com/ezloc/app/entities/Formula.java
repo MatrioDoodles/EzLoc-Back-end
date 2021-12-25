@@ -21,6 +21,6 @@ public class Formula {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_ENTERPRISE", referencedColumnName = "id")
+    @JoinColumn(name = "ID_ENTERPRISE", referencedColumnName = "ID_ENTERPRISE")
     private Enterprise enterprise;
 }
