@@ -25,8 +25,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public Car add(Car car) {
-        return carRepository.save(car);
+    public Optional<Car> add(Optional<Car> car) {
+        Optional<Car> resource = Optional.of(carRepository.save(car.get()));
+        return resource;
     }
 
     @Override
@@ -37,14 +38,34 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public Car update(Car car) {
-        return carRepository.save(car);
+    public String update(Long id,Optional<Car> car) {
+
+
+            Car resource = carRepository.getById(id);
+            resource.setConstructor(Optional.ofNullable(car).map(c->c.get().getConstructor()).orElse(resource.getConstructor()));
+            resource.setModel(Optional.ofNullable(car).map(c->c.get().getModel()).orElse(resource.getModel()));
+            resource.setColor(Optional.ofNullable(car).map(c->c.get().getColor()).orElse(resource.getColor()));
+            resource.setYear(Optional.ofNullable(car).map(c->c.get().getYear()).orElse(resource.getYear()));
+            resource.setCategory(Optional.ofNullable(car).map(c->c.get().getCategory()).orElse(resource.getCategory()));
+            resource.setTrim(Optional.ofNullable(car).map(c->c.get().getTrim()).orElse(resource.getTrim()));
+            resource.setFuel(Optional.ofNullable(car).map(c->c.get().getFuel()).orElse(resource.getFuel()));
+            resource.setMileage(Optional.ofNullable(car).map(c->c.get().getMileage()).orElse(resource.getMileage()));
+            resource.setGearbox(Optional.ofNullable(car).map(c->c.get().getGearbox()).orElse(resource.getGearbox()));
+            resource.setRegistration(Optional.ofNullable(car).map(c->c.get().getRegistration()).orElse(resource.getRegistration()));
+            resource.setAvailable(Optional.ofNullable(car).map(c->c.get().isAvailable()).orElse(resource.isAvailable()));
+            resource.setFiscalPower(Optional.ofNullable(car).map(c->c.get().getFiscalPower()).orElse(resource.getFiscalPower()));
+
+
+
+            carRepository.save(resource);
+            return "Car N "+id+" updated successfully";
+
     }
 
     @Override
     @Transactional
     public String delete(long id) {
         carRepository.deleteById(id);
-        return "Car N°"+id+" deleted successfully";
+        return "Car N°" +id+ " deleted successfully";
     }
 }

@@ -9,8 +9,8 @@ import java.util.Optional;
 public interface CarService {
 
     List<Car> findAll();
-    Car add(Car car);
+    Optional<Car> add(Optional<Car> car);
     Optional<Car>  findById(long id);
-    Car update(Car car);
+    String update(Long id,Optional<Car> car);
     String delete(long id);
     }
