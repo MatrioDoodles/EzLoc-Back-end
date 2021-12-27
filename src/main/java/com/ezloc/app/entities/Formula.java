@@ -4,6 +4,7 @@ package com.ezloc.app.entities;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Formula {
+public class Formula extends RepresentationModel<Formula> {
     @Id
     @SequenceGenerator(name = "formula_sequence",sequenceName = "formula_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "formula_sequence")

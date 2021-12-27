@@ -3,6 +3,7 @@ package com.ezloc.app.entities;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Metric {
+public class Metric extends RepresentationModel<Metric> {
     @Id
     @SequenceGenerator(name = "metric_sequence",sequenceName = "metric_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "metric_sequence")

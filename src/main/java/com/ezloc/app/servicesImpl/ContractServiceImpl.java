@@ -1,8 +1,49 @@
 package com.ezloc.app.servicesImpl;
 
+import com.ezloc.app.entities.Contract;
+import com.ezloc.app.repositories.ContractRepository;
 import com.ezloc.app.services.ContractService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContractServiceImpl implements ContractService {
+    @Autowired
+    private ContractRepository contractRepository;
+
+    @Override
+    public List<Contract> findAll() {
+        return contractRepository.findAll();
+    }
+
+    @Override
+    public Optional<Contract> add(Optional<Contract> contract) {
+        Optional<Contract> resource = Optional.of(contractRepository.save(contract.get()));
+        return resource;
+    }
+
+    @Override
+    public Optional<Contract> findById(long id) {
+        return contractRepository.findById(id);
+    }
+
+    @Override
+    public String update(Long id, Optional<Contract> contract) {
+        Contract resource = contractRepository.getById(id);
+        resource.setCode(Optional.ofNullable(contract).map(c->c.get().getCode()).orElse(resource.getCode()));
+        resource.setContractFile(Optional.ofNullable(contract).map(c->c.get().getContractFile()).orElse(resource.getContractFile()));
+        resource.setDateOfCreation(Optional.ofNullable(contract).map(c->c.get().getDateOfCreation()).orElse(resource.getDateOfCreation()));
+
+        contractRepository.save(resource);
+        return "Contract N° "+id+" updated successfully";
+    }
+
+    @Override
+    public String delete(long id) {
+        contractRepository.deleteById(id);
+        return "Contact N° "+id+" Deleted Successfully";
+    }
 }

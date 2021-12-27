@@ -6,12 +6,17 @@ import com.ezloc.app.entities.Car;
 import com.ezloc.app.services.CarService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @RequestMapping(value = "/cars")
@@ -23,14 +28,29 @@ public class CarController {
 
 
     @GetMapping
-    public List<Car> findAll() {
-        return carService.findAll();
+    public CollectionModel<Car> findAll() {
+        List<Car> allCars = carService.findAll();
+        for (Car car : allCars) {
+            Long carId = car.getId();
+            Link selfLink = linkTo(CarController.class).slash(carId).withSelfRel();
+            car.add(selfLink);
+            }
+
+
+        Link link = linkTo(CarController.class).withSelfRel();
+        CollectionModel<Car> result = CollectionModel.of(allCars, link);
+        return result;
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
+
         Optional<Car> car = carService.findById(id);
+
         if(car.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(car);
+            Car resource = car.get();
+            Link selfLink = linkTo(CarController.class).slash(id).withSelfRel();
+            EntityModel<Car> result = EntityModel.of(resource,selfLink);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.CAR_NOT_FOUND);
