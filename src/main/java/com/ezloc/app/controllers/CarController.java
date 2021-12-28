@@ -22,10 +22,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RequestMapping(value = "/cars")
 public class CarController {
 
-    @Autowired
+
     private CarService carService;
 
-
+    @Autowired
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping
     public CollectionModel<Car> findAll() {
