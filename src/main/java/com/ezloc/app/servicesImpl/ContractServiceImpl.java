@@ -11,8 +11,13 @@ import java.util.Optional;
 
 @Service
 public class ContractServiceImpl implements ContractService {
+
+    private final ContractRepository contractRepository;
+
     @Autowired
-    private ContractRepository contractRepository;
+    public ContractServiceImpl(ContractRepository contractRepository) {
+        this.contractRepository = contractRepository;
+    }
 
     @Override
     public List<Contract> findAll() {
@@ -35,6 +40,7 @@ public class ContractServiceImpl implements ContractService {
         Contract resource = contractRepository.getById(id);
         resource.setCode(Optional.ofNullable(contract).map(c->c.get().getCode()).orElse(resource.getCode()));
         resource.setContractFile(Optional.ofNullable(contract).map(c->c.get().getContractFile()).orElse(resource.getContractFile()));
+        resource.setContractFileName(Optional.ofNullable(contract).map(c->c.get().getContractFileName()).orElse(resource.getContractFileName()));
         resource.setDateOfCreation(Optional.ofNullable(contract).map(c->c.get().getDateOfCreation()).orElse(resource.getDateOfCreation()));
 
         contractRepository.save(resource);

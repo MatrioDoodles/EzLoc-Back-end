@@ -23,6 +23,7 @@ public class Contract extends RepresentationModel<Contract> {
     private Long id;
     private String code;
     private String contractFile;
+    private String contractFileName;
     private LocalDate dateOfCreation;
 
 

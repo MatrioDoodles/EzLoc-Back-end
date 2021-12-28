@@ -24,6 +24,7 @@ public class Invoice extends RepresentationModel<Invoice> {
     private boolean paid;
     private String code;
     private String invoiceFile;
+    private String invoiceFileName;
 
     @OneToOne(mappedBy = "invoice")
     private Reservation reservation;

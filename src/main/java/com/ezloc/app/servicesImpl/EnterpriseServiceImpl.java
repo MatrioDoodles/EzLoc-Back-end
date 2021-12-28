@@ -13,8 +13,14 @@ import java.util.Optional;
 @Service
 public class EnterpriseServiceImpl implements EnterpriseService {
 
+
+    private final EnterpriseRepository enterpriseRepository;
+
     @Autowired
-    private EnterpriseRepository enterpriseRepository;
+    public EnterpriseServiceImpl(EnterpriseRepository enterpriseRepository) {
+        this.enterpriseRepository = enterpriseRepository;
+    }
+
     @Override
     public List<Enterprise> findAll() {
         return enterpriseRepository.findAll();

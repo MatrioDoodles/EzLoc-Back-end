@@ -1,7 +1,9 @@
 package com.ezloc.app.servicesImpl;
 
 import com.ezloc.app.entities.Formula;
+import com.ezloc.app.repositories.FormulaRepository;
 import com.ezloc.app.services.FormulaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -10,6 +12,14 @@ import java.util.Optional;
 
 @Service
 public class FormulaServiceImpl implements FormulaService {
+
+    private final FormulaRepository formulaRepository;
+
+    @Autowired
+    public FormulaServiceImpl(FormulaRepository formulaRepository) {
+        this.formulaRepository = formulaRepository;
+    }
+
     @Override
     public List<Formula> findAll() {
         return null;

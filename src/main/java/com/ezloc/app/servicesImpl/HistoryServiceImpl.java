@@ -14,8 +14,14 @@ import java.util.Optional;
 @Service
 public class HistoryServiceImpl implements HistoryService {
 
+
+    private final HistoryRepository historyRepository;
+
     @Autowired
-    private HistoryRepository historyRepository;
+    public HistoryServiceImpl(HistoryRepository historyRepository) {
+        this.historyRepository = historyRepository;
+    }
+
     @Override
     public List<History> findAll() {
         return historyRepository.findAll();
