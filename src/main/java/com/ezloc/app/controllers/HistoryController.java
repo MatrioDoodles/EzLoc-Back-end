@@ -34,6 +34,9 @@ public class HistoryController {
             Long HistoryId = History.getId();
             Link selfLink = linkTo(HistoryController.class).slash(HistoryId).withSelfRel();
             History.add(selfLink);
+            if(History.getUser()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(History.getUser().getId()).withRel("User");
+                History.add(enterpriseLink);}
         }
 
 
@@ -50,6 +53,9 @@ public class HistoryController {
             History resource = History.get();
             Link selfLink = linkTo(HistoryController.class).slash(id).withSelfRel();
             EntityModel<History> result = EntityModel.of(resource,selfLink);
+            if(resource.getUser()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getUser().getId()).withRel("User");
+                resource.add(enterpriseLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {

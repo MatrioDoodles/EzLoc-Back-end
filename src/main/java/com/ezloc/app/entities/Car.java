@@ -36,7 +36,8 @@ public class Car extends RepresentationModel<Car> {
     private int fiscalPower;
     @OneToMany(mappedBy = "car",fetch = FetchType.LAZY)
     private Set<Reservation> reservations= new HashSet<Reservation>();
-    @OneToOne(mappedBy = "car")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_MAINTENANCE", referencedColumnName = "ID_MAINTENANCE")
     private Maintenance maintenance;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_ENTERPRISE")

@@ -34,6 +34,12 @@ public class UserController {
             Long UserId = User.getId();
             Link selfLink = linkTo(UserController.class).slash(UserId).withSelfRel();
             User.add(selfLink);
+            if(User.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(User.getEnterprise().getId()).withRel("Enterprise");
+                User.add(enterpriseLink);}
+            if(User.getRole()!=null)
+            {Link roleLink = linkTo(EnterpriseController.class).slash(User.getRole().getId()).withRel("Role");
+                User.add(roleLink);}
         }
 
 
@@ -50,6 +56,12 @@ public class UserController {
             User resource = User.get();
             Link selfLink = linkTo(UserController.class).slash(id).withSelfRel();
             EntityModel<User> result = EntityModel.of(resource,selfLink);
+            if(resource.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
+                result.add(enterpriseLink);}
+            if(resource.getRole()!=null)
+            {Link roleLink = linkTo(EnterpriseController.class).slash(resource.getRole().getId()).withRel("Role");
+                resource.add(roleLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {

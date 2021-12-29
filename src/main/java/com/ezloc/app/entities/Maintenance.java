@@ -30,8 +30,7 @@ public class Maintenance extends RepresentationModel<Maintenance> {
     private boolean  vignettePaid;
     private boolean  assurancePaid;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_CAR", referencedColumnName = "ID_CAR")
+    @OneToOne(mappedBy = "maintenance")
     private Car car;
 
 }

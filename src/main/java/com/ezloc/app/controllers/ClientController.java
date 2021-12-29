@@ -35,6 +35,10 @@ public class ClientController {
             Long ClientId = Client.getId();
             Link selfLink = linkTo(ClientController.class).slash(ClientId).withSelfRel();
             Client.add(selfLink);
+            if(Client.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(Client.getEnterprise().getId()).withRel("Enterprise");
+                Client.add(enterpriseLink);}
+
         }
 
 
@@ -51,6 +55,9 @@ public class ClientController {
             Client resource = Client.get();
             Link selfLink = linkTo(ClientController.class).slash(id).withSelfRel();
             EntityModel<Client> result = EntityModel.of(resource,selfLink);
+            if(resource.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
+                result.add(enterpriseLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {

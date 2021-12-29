@@ -34,6 +34,9 @@ public class SettingsController {
             Long SettingsId = Settings.getId();
             Link selfLink = linkTo(SettingsController.class).slash(SettingsId).withSelfRel();
             Settings.add(selfLink);
+            if(Settings.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(Settings.getEnterprise().getId()).withRel("Enterprise");
+                Settings.add(enterpriseLink);}
         }
 
 
@@ -50,6 +53,9 @@ public class SettingsController {
             Settings resource = Settings.get();
             Link selfLink = linkTo(SettingsController.class).slash(id).withSelfRel();
             EntityModel<Settings> result = EntityModel.of(resource,selfLink);
+            if(resource.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
+                result.add(enterpriseLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {

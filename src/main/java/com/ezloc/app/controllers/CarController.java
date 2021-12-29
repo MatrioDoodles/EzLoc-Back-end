@@ -3,6 +3,7 @@ package com.ezloc.app.controllers;
 
 import com.ezloc.app.config.Constants;
 import com.ezloc.app.entities.Car;
+import com.ezloc.app.entities.Maintenance;
 import com.ezloc.app.services.CarService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class CarController {
             Long carId = car.getId();
             Link selfLink = linkTo(CarController.class).slash(carId).withSelfRel();
             car.add(selfLink);
+            if(car.getMaintenance()!=null)
+            {Link maintenanceLink = linkTo(MaintenanceController.class).slash(car.getMaintenance().getId()).withRel("Maintenance");
+            car.add(maintenanceLink);}
+            if(car.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(car.getEnterprise().getId()).withRel("Enterprise");
+                car.add(enterpriseLink);}
+
             }
 
 
@@ -53,6 +61,13 @@ public class CarController {
             Car resource = car.get();
             Link selfLink = linkTo(CarController.class).slash(id).withSelfRel();
             EntityModel<Car> result = EntityModel.of(resource,selfLink);
+            if(resource.getMaintenance()!=null) {
+                Link maintenanceLink = linkTo(MaintenanceController.class).slash(resource.getMaintenance().getId()).withRel("Maintenance");
+                result.add(maintenanceLink);
+            }
+            if(resource.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
+                result.add(enterpriseLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {

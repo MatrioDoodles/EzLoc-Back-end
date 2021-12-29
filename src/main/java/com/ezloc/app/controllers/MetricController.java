@@ -34,6 +34,9 @@ public class MetricController {
             Long MetricId = Metric.getId();
             Link selfLink = linkTo(MetricController.class).slash(MetricId).withSelfRel();
             Metric.add(selfLink);
+            if(Metric.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(Metric.getEnterprise().getId()).withRel("Enterprise");
+                Metric.add(enterpriseLink);}
         }
 
 
@@ -50,6 +53,9 @@ public class MetricController {
             Metric resource = Metric.get();
             Link selfLink = linkTo(MetricController.class).slash(id).withSelfRel();
             EntityModel<Metric> result = EntityModel.of(resource,selfLink);
+            if(resource.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
+                resource.add(enterpriseLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {

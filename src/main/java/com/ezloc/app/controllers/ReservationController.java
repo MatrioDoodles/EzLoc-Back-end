@@ -34,6 +34,18 @@ public class ReservationController {
             Long ReservationId = Reservation.getId();
             Link selfLink = linkTo(ReservationController.class).slash(ReservationId).withSelfRel();
             Reservation.add(selfLink);
+            if(Reservation.getClient()!=null)
+            {Link clientLink = linkTo(EnterpriseController.class).slash(Reservation.getClient().getId()).withRel("Client");
+                Reservation.add(clientLink);}
+            if(Reservation.getCar()!=null)
+            {Link carLink = linkTo(EnterpriseController.class).slash(Reservation.getCar().getId()).withRel("Car");
+                Reservation.add(carLink);}
+            if(Reservation.getContract()!=null)
+            {Link contractLink = linkTo(EnterpriseController.class).slash(Reservation.getContract().getId()).withRel("Contract");
+                Reservation.add(contractLink);}
+            if(Reservation.getInvoice()!=null)
+            {Link invoiceLink = linkTo(EnterpriseController.class).slash(Reservation.getInvoice().getId()).withRel("Invoice");
+                Reservation.add(invoiceLink);}
         }
 
 
@@ -50,6 +62,18 @@ public class ReservationController {
             Reservation resource = Reservation.get();
             Link selfLink = linkTo(ReservationController.class).slash(id).withSelfRel();
             EntityModel<Reservation> result = EntityModel.of(resource,selfLink);
+            if(resource.getClient()!=null)
+            {Link clientLink = linkTo(EnterpriseController.class).slash(resource.getClient().getId()).withRel("Client");
+                resource.add(clientLink);}
+            if(resource.getCar()!=null)
+            {Link carLink = linkTo(EnterpriseController.class).slash(resource.getCar().getId()).withRel("Car");
+                resource.add(carLink);}
+            if(resource.getContract()!=null)
+            {Link contractLink = linkTo(EnterpriseController.class).slash(resource.getContract().getId()).withRel("Contract");
+                resource.add(contractLink);}
+            if(resource.getInvoice()!=null)
+            {Link invoiceLink = linkTo(EnterpriseController.class).slash(resource.getInvoice().getId()).withRel("Invoice");
+                resource.add(invoiceLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {
