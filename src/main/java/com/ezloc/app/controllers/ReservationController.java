@@ -46,6 +46,12 @@ public class ReservationController {
             if(Reservation.getInvoice()!=null)
             {Link invoiceLink = linkTo(EnterpriseController.class).slash(Reservation.getInvoice().getId()).withRel("Invoice");
                 Reservation.add(invoiceLink);}
+            if(Reservation.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(Reservation.getEnterprise().getId()).withRel("Enterprise");
+                Reservation.add(enterpriseLink);}
+            if(Reservation.getUser()!=null)
+            {Link userLink = linkTo(EnterpriseController.class).slash(Reservation.getUser().getId()).withRel("User");
+                Reservation.add(userLink);}
         }
 
 
@@ -74,6 +80,12 @@ public class ReservationController {
             if(resource.getInvoice()!=null)
             {Link invoiceLink = linkTo(EnterpriseController.class).slash(resource.getInvoice().getId()).withRel("Invoice");
                 resource.add(invoiceLink);}
+            if(resource.getEnterprise()!=null)
+            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
+                resource.add(enterpriseLink);}
+            if(resource.getUser()!=null)
+            {Link userLink = linkTo(EnterpriseController.class).slash(resource.getUser().getId()).withRel("User");
+                resource.add(userLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }
         else {

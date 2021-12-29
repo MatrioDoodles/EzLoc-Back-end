@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,17 +23,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtUnAuthorizedResponseAuthenticationEntryPoint jwtUnAuthorizedResponseAuthenticationEntryPoint;
+    private final JwtUnAuthorizedResponseAuthenticationEntryPoint jwtUnAuthorizedResponseAuthenticationEntryPoint;
 
-    @Autowired
-    private UserDetailsService jwtInMemoryUserDetailsService;
+    private final UserDetailsService jwtInMemoryUserDetailsService;
 
-    @Autowired
-    private JwtTokenAuthorizationOncePerRequestFilter jwtAuthenticationTokenFilter;
+    private final JwtTokenAuthorizationOncePerRequestFilter jwtAuthenticationTokenFilter;
 
     @Value("${jwt.get.token.uri}")
     private String authenticationPath;
+
+    @Autowired
+    public JWTWebSecurityConfig(JwtUnAuthorizedResponseAuthenticationEntryPoint jwtUnAuthorizedResponseAuthenticationEntryPoint,
+                                UserDetailsService jwtInMemoryUserDetailsService,
+                                JwtTokenAuthorizationOncePerRequestFilter jwtAuthenticationTokenFilter) {
+        this.jwtUnAuthorizedResponseAuthenticationEntryPoint = jwtUnAuthorizedResponseAuthenticationEntryPoint;
+        this.jwtInMemoryUserDetailsService = jwtInMemoryUserDetailsService;
+        this.jwtAuthenticationTokenFilter = jwtAuthenticationTokenFilter;
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

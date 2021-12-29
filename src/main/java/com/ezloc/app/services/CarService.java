@@ -13,4 +13,5 @@ public interface CarService {
     Optional<Car>  findById(long id);
     String update(Long id,Optional<Car> car);
     String delete(long id);
+    List<Car> findByenterprise_id(Long id);
     }

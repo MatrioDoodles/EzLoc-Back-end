@@ -29,8 +29,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     @Transactional
     public Optional<Reservation> add(Optional<Reservation> reservation) {
-        Optional<Reservation> resource = Optional.of(reservationRepository.save(reservation.get()));
-        return resource;
+        return Optional.of(reservationRepository.save(reservation.get()));
     }
 
     @Override
@@ -71,5 +70,25 @@ public class ReservationServiceImpl implements ReservationService {
     public String delete(long id) {
         reservationRepository.deleteById(id);
         return "Reservation N°"+id+" Deleted Successfully";
+    }
+
+    @Override
+    public List<Reservation> findBycar_id(Long id) {
+        return reservationRepository.findBycar_id(id);
+    }
+
+    @Override
+    public List<Reservation> findByclient_id(Long id) {
+        return reservationRepository.findByclient_id(id);
+    }
+
+    @Override
+    public List<Reservation> findByuser_id(Long id) {
+        return reservationRepository.findByuser_id(id);
+    }
+
+    @Override
+    public List<Reservation> findByenterprise_id(Long id) {
+        return reservationRepository.findByenterprise_id(id);
     }
 }

@@ -48,4 +48,6 @@ public class Enterprise extends RepresentationModel<Enterprise> {
     private Set<User> users;
     @OneToOne(mappedBy = "enterprise")
     private Formula formula;
+    @OneToMany(mappedBy = "enterprise", fetch = FetchType.LAZY)
+    private Set<Reservation> reservations;
 }

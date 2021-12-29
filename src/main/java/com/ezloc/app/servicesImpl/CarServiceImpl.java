@@ -30,8 +30,7 @@ public class CarServiceImpl implements CarService {
     @Override
     @Transactional
     public Optional<Car> add(Optional<Car> car) {
-        Optional<Car> resource = Optional.of(carRepository.save(car.get()));
-        return resource;
+        return Optional.of(carRepository.save(car.get()));
     }
 
     @Override
@@ -71,5 +70,10 @@ public class CarServiceImpl implements CarService {
     public String delete(long id) {
         carRepository.deleteById(id);
         return "Car N°" +id+ " deleted successfully";
+    }
+
+    @Override
+    public List<Car> findByenterprise_id(Long id) {
+        return carRepository.findByenterprise_id(id);
     }
 }

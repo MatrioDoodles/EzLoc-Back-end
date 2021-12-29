@@ -30,8 +30,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     public Optional<Role> add(Optional<Role> role) {
-        Optional<Role> resource = Optional.of(roleRepository.save(role.get()));
-        return resource;
+        return Optional.of(roleRepository.save(role.get()));
     }
 
     @Override

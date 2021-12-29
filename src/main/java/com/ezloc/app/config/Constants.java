@@ -14,4 +14,6 @@ public class Constants {
     public static final String ROLE_NOT_FOUND = "ROLE_NOT_FOUND";
     public static final String SETTINGS_NOT_FOUND = "SETTINGS_NOT_FOUND";
     public static final String USER_NOT_FOUND = "USER_NOT_FOUND";
+    public static final String ENTERPRISE = "ENTERPRISE";
+
 }

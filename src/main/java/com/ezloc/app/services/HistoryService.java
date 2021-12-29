@@ -11,4 +11,5 @@ public interface HistoryService {
     Optional<History>  findById(long id);
     String update(Long id,Optional<History> history);
     String delete(long id);
+    List<History> findByuser_id(Long Id);
 }

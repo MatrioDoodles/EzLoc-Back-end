@@ -20,34 +20,33 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RestController
 @RequestMapping(value = "/contracts")
 public class ContractController {
-    private ContractService ContractService;
+    private ContractService contractService;
 
     @Autowired
-    public ContractController(ContractService ContractService) {
-        this.ContractService = ContractService;
+    public ContractController(ContractService contractService) {
+        this.contractService = contractService;
     }
 
     @GetMapping
     public CollectionModel<Contract> findAll() {
-        List<Contract> allContracts = ContractService.findAll();
-        for (Contract Contract : allContracts) {
-            Long ContractId = Contract.getId();
-            Link selfLink = linkTo(ContractController.class).slash(ContractId).withSelfRel();
-            Contract.add(selfLink);
+        List<Contract> allContracts = contractService.findAll();
+        for (Contract contract : allContracts) {
+            Long contractId = contract.getId();
+            Link selfLink = linkTo(ContractController.class).slash(contractId).withSelfRel();
+            contract.add(selfLink);
         }
 
 
         Link link = linkTo(ContractController.class).withSelfRel();
-        CollectionModel<Contract> result = CollectionModel.of(allContracts, link);
-        return result;
+        return CollectionModel.of(allContracts, link);
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity findById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
 
-        Optional<Contract> Contract = ContractService.findById(id);
+        Optional<Contract> contract = contractService.findById(id);
 
-        if(Contract.isPresent()) {
-            Contract resource = Contract.get();
+        if(contract.isPresent()) {
+            Contract resource = contract.get();
             Link selfLink = linkTo(ContractController.class).slash(id).withSelfRel();
             EntityModel<Contract> result = EntityModel.of(resource,selfLink);
             return ResponseEntity.status(HttpStatus.OK).body(result);
@@ -60,25 +59,25 @@ public class ContractController {
     @ResponseStatus(HttpStatus.CREATED)
     public Optional<Contract> create(@RequestBody Optional<Contract> resource) {
         Preconditions.checkNotNull(resource,"Populate all infos");
-        return ContractService.add(resource);
+        return contractService.add(resource);
     }
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Contract> resource) {
 
-        Optional<Contract> Contract = ContractService.findById(id);
-        if(Contract.isPresent()) {
+        Optional<Contract> contract = contractService.findById(id);
+        if(contract.isPresent()) {
 
-            return ResponseEntity.status(HttpStatus.OK).body(ContractService.update(id,resource));
+            return ResponseEntity.status(HttpStatus.OK).body(contractService.update(id,resource));
         }
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.CONTRACT_NOT_FOUND);
     }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        Optional<Contract> Contract = ContractService.findById(id);
-        if(Contract.isPresent()) {
+        Optional<Contract> contract = contractService.findById(id);
+        if(contract.isPresent()) {
 
-            return ResponseEntity.status(HttpStatus.OK).body(ContractService.delete(id));
+            return ResponseEntity.status(HttpStatus.OK).body(contractService.delete(id));
         }
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.CONTRACT_NOT_FOUND);

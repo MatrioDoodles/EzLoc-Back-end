@@ -4,7 +4,9 @@ package com.ezloc.app.controllers;
 import com.ezloc.app.config.Constants;
 import com.ezloc.app.entities.Car;
 import com.ezloc.app.entities.Maintenance;
+import com.ezloc.app.entities.Reservation;
 import com.ezloc.app.services.CarService;
+import com.ezloc.app.services.ReservationService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -24,11 +26,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 public class CarController {
 
 
-    private CarService carService;
+    private final CarService carService;
+    private final ReservationService reservationService;
 
     @Autowired
-    public CarController(CarService carService) {
+    public CarController(CarService carService, ReservationService reservationService) {
         this.carService = carService;
+        this.reservationService = reservationService;
     }
 
     @GetMapping
@@ -69,6 +73,25 @@ public class CarController {
             {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
                 result.add(enterpriseLink);}
             return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.CAR_NOT_FOUND);
+        }
+    }
+    @GetMapping(value = "/{id}/reservations")
+    public ResponseEntity findByReservation(@PathVariable("id") Long id) {
+
+        Optional<Car> car = carService.findById(id);
+
+        if(car.isPresent()) {
+            List<Reservation> reservationList = reservationService.findBycar_id(id);
+            if(reservationList.size()>0){
+                return ResponseEntity.status(HttpStatus.OK).body(reservationList);
+            }
+            else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("NO_RESERVATIONS_FOR_THIS_CAR");
+            }
+
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.CAR_NOT_FOUND);

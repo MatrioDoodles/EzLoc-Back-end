@@ -28,8 +28,7 @@ public class SettingsServiceImpl implements SettingsService {
     @Override
     @Transactional
     public Optional<Settings> add(Optional<Settings> settings) {
-        Optional<Settings> resource = Optional.of(settingsRepository.save(settings.get()));
-        return resource;
+        return Optional.of(settingsRepository.save(settings.get()));
     }
 
     @Override

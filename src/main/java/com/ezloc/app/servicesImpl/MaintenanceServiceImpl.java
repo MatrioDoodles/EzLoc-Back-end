@@ -29,8 +29,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Override
     @Transactional
     public Optional<Maintenance> add(Optional<Maintenance> maintenance) {
-        Optional<Maintenance> resource = Optional.of(maintenanceRepository.save(maintenance.get()));
-        return resource;
+        return Optional.of(maintenanceRepository.save(maintenance.get()));
     }
 
     @Override

@@ -29,8 +29,7 @@ public class MetricServiceImpl implements MetricService {
     @Override
     @Transactional
     public Optional<Metric> add(Optional<Metric> metric) {
-        Optional<Metric> resource = Optional.of(metricRepository.save(metric.get()));
-        return resource;
+        return Optional.of(metricRepository.save(metric.get()));
     }
 
     @Override
@@ -52,5 +51,10 @@ public class MetricServiceImpl implements MetricService {
     public String delete(long id) {
         metricRepository.deleteById(id);
         return "Metric N° "+id+" Deleted Successfully";
+    }
+
+    @Override
+    public List<Metric> findByenterprise_id(Long id) {
+        return metricRepository.findByenterprise_id(id);
     }
 }

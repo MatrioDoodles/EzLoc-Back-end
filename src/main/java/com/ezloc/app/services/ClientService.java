@@ -12,4 +12,5 @@ public interface ClientService {
     Optional<Client>  findById(long id);
     String update(Long id,Optional<Client> client);
     String delete(long id);
+    List<Client> findByenterprise_id(Long id);
 }

@@ -55,6 +55,8 @@ public class User extends RepresentationModel<User> implements UserDetails {
 	private Enterprise enterprise;
 	@OneToMany(mappedBy = "user")
 	private Set<History> histories;
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private Set<Reservation> reservations;
 
 	@JsonIgnore
 	@Override

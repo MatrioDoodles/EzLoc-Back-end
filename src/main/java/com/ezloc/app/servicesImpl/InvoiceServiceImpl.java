@@ -29,8 +29,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     @Transactional
     public Optional<Invoice> add(Optional<Invoice> invoice) {
-        Optional<Invoice> resource = Optional.of(invoiceRepository.save(invoice.get()));
-        return resource;
+        return Optional.of(invoiceRepository.save(invoice.get()));
     }
 
     @Override

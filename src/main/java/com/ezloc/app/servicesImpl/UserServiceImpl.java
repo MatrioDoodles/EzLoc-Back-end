@@ -31,8 +31,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> add(Optional<User> user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.get().setPassword(encoder.encode(user.get().getPassword()));
-        Optional<User> resource = Optional.of(userRepository.save(user.get()));
-        return resource;
+        return Optional.of(userRepository.save(user.get()));
     }
 
     @Override
@@ -64,5 +63,15 @@ public class UserServiceImpl implements UserService {
     public String delete(long id) {
         userRepository.deleteById(id);
         return "User N° "+id+" Deleted Successfully";
+    }
+
+    @Override
+    public User findByusername(String username) {
+        return userRepository.findByusername(username);
+    }
+
+    @Override
+    public List<User> findByenterprise_id(Long id) {
+        return userRepository.findByenterprise_id(id);
     }
 }

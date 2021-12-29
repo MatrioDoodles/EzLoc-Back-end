@@ -20,34 +20,34 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RestController
 @RequestMapping(value = "/formulas")
 public class FormulaController {
-    private FormulaService FormulaService;
+
+    private final FormulaService formulaService;
 
     @Autowired
-    public FormulaController(FormulaService FormulaService) {
-        this.FormulaService = FormulaService;
+    public FormulaController(FormulaService formulaService) {
+        this.formulaService = formulaService;
     }
 
     @GetMapping
     public CollectionModel<Formula> findAll() {
-        List<Formula> allFormulas = FormulaService.findAll();
-        for (Formula Formula : allFormulas) {
-            Long FormulaId = Formula.getId();
-            Link selfLink = linkTo(FormulaController.class).slash(FormulaId).withSelfRel();
-            Formula.add(selfLink);
+        List<Formula> allFormulas = formulaService.findAll();
+        for (Formula formula : allFormulas) {
+            Long formulaId = formula.getId();
+            Link selfLink = linkTo(FormulaController.class).slash(formulaId).withSelfRel();
+            formula.add(selfLink);
         }
 
 
         Link link = linkTo(FormulaController.class).withSelfRel();
-        CollectionModel<Formula> result = CollectionModel.of(allFormulas, link);
-        return result;
+        return CollectionModel.of(allFormulas, link);
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity findById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
 
-        Optional<Formula> Formula = FormulaService.findById(id);
+        Optional<Formula> formula = formulaService.findById(id);
 
-        if(Formula.isPresent()) {
-            Formula resource = Formula.get();
+        if(formula.isPresent()) {
+            Formula resource = formula.get();
             Link selfLink = linkTo(FormulaController.class).slash(id).withSelfRel();
             EntityModel<Formula> result = EntityModel.of(resource,selfLink);
             return ResponseEntity.status(HttpStatus.OK).body(result);
@@ -60,25 +60,25 @@ public class FormulaController {
     @ResponseStatus(HttpStatus.CREATED)
     public Optional<Formula> create(@RequestBody Optional<Formula> resource) {
         Preconditions.checkNotNull(resource,"Populate all infos");
-        return FormulaService.add(resource);
+        return formulaService.add(resource);
     }
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Formula> resource) {
 
-        Optional<Formula> Formula = FormulaService.findById(id);
-        if(Formula.isPresent()) {
+        Optional<Formula> formula = formulaService.findById(id);
+        if(formula.isPresent()) {
 
-            return ResponseEntity.status(HttpStatus.OK).body(FormulaService.update(id,resource));
+            return ResponseEntity.status(HttpStatus.OK).body(formulaService.update(id,resource));
         }
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.FORMULA_NOT_FOUND);
     }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        Optional<Formula> Formula = FormulaService.findById(id);
-        if(Formula.isPresent()) {
+        Optional<Formula> formula = formulaService.findById(id);
+        if(formula.isPresent()) {
 
-            return ResponseEntity.status(HttpStatus.OK).body(FormulaService.delete(id));
+            return ResponseEntity.status(HttpStatus.OK).body(formulaService.delete(id));
         }
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.FORMULA_NOT_FOUND);

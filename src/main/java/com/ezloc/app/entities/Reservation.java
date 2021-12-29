@@ -55,4 +55,11 @@ public class Reservation extends RepresentationModel<Reservation> {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_INVOICE", referencedColumnName = "ID_INVOICE")
     private Invoice invoice;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_USER")
+    private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_ENTERPRISE")
+    private Enterprise enterprise;
+
 }

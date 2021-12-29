@@ -11,4 +11,5 @@ public interface MetricService {
     Optional<Metric>  findById(long id);
     String update(Long id,Optional<Metric> metric);
     String delete(long id);
+    List<Metric> findByenterprise_id(Long id);
 }

@@ -28,7 +28,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
     @Override
     public Optional<Enterprise> add(Optional<Enterprise> enterprise) {
-        return Optional.empty();
+        return Optional.of(enterpriseRepository.save(enterprise.get()));
     }
 
     @Override

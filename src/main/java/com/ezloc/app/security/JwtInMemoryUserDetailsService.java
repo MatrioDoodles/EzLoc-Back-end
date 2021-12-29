@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.ezloc.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ezloc.app.entities.User;
-import com.ezloc.app.repositories.UserRepository;
 
 
 
@@ -20,12 +20,17 @@ import com.ezloc.app.repositories.UserRepository;
 public class JwtInMemoryUserDetailsService implements UserDetailsService {
 
   static List<User> userList = new ArrayList<>();
+
+  private final UserService userService;
+
   @Autowired
-  private UserRepository userRepository;
+  public JwtInMemoryUserDetailsService(UserService userService) {
+    this.userService = userService;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-	  userList = userRepository.findAll();
+	  userList = userService.findAll();
     Optional<User> findFirst = userList.stream()
         .filter(user -> user.getUsername().equals(username)).findFirst();
 

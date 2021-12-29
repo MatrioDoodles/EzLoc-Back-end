@@ -26,8 +26,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public Optional<Contract> add(Optional<Contract> contract) {
-        Optional<Contract> resource = Optional.of(contractRepository.save(contract.get()));
-        return resource;
+        return Optional.of(contractRepository.save(contract.get()));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.ezloc.app.servicesImpl;
 
 
-import com.ezloc.app.entities.Car;
 import com.ezloc.app.entities.History;
 import com.ezloc.app.repositories.HistoryRepository;
 import com.ezloc.app.services.HistoryService;
@@ -29,8 +28,7 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public Optional<History> add(Optional<History> history) {
-        Optional<History> resource = Optional.of(historyRepository.save(history.get()));
-        return resource;
+        return Optional.of(historyRepository.save(history.get()));
     }
 
     @Override
@@ -53,6 +51,12 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public String delete(long id) {
+        historyRepository.deleteById(id);
         return "History N° "+id+"Deleted Successfully";
+    }
+
+    @Override
+    public List<History> findByuser_id(Long Id) {
+        return historyRepository.findByuser_id(Id);
     }
 }

@@ -28,8 +28,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional
     public Optional<Client> add(Optional<Client> client) {
-        Optional<Client> resource = Optional.of(clientRepository.save(client.get()));
-        return resource;
+        return Optional.of(clientRepository.save(client.get()));
     }
 
     @Override
@@ -61,5 +60,10 @@ public class ClientServiceImpl implements ClientService {
     public String delete(long id) {
         clientRepository.deleteById(id);
         return "Client N° "+ id +" Deleted Successfully";
+    }
+
+    @Override
+    public List<Client> findByenterprise_id(Long id) {
+        return clientRepository.findByenterprise_id(id);
     }
 }
