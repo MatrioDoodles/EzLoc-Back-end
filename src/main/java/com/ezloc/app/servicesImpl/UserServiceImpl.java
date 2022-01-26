@@ -50,9 +50,13 @@ public class UserServiceImpl implements UserService {
         resource.setPhone(Optional.ofNullable(user).map(c->c.get().getPhone()).orElse(resource.getPhone()));
         resource.setAdress(Optional.ofNullable(user).map(c->c.get().getAdress()).orElse(resource.getAdress()));
         resource.setUsername(Optional.ofNullable(user).map(c->c.get().getUsername()).orElse(resource.getUsername()));
-        resource.setPassword(Optional.ofNullable(user).map(c-> encoder.encode(c.get().getPassword())).orElse(resource.getPassword()));
+       /* if(resource.getPassword() != null) {
+            resource.setPassword(Optional.ofNullable(user).map(c -> encoder.encode(c.get().getPassword())).orElse(resource.getPassword()));
+        }*/
         resource.setCity(Optional.ofNullable(user).map(c->c.get().getCity()).orElse(resource.getCity()));
         resource.setActivated(Optional.ofNullable(user).map(c->c.get().isActivated()).orElse(resource.isActivated()));
+        resource.setRole(Optional.ofNullable(user).map(c->c.get().getRole()).orElse(resource.getRole()));
+        resource.setEnterprise(Optional.ofNullable(user).map(c->c.get().getEnterprise()).orElse(resource.getEnterprise()));
 
         userRepository.save(resource);
         return "User N° "+id+" Updated Successfully";

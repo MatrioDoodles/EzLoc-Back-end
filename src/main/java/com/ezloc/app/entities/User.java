@@ -40,6 +40,7 @@ public class User extends RepresentationModel<User> implements UserDetails {
 	private String phone;
 	private String adress;
 	private String username;
+	@JsonIgnore
 	private String password;
 	private String city;
 	private boolean activated;
@@ -53,8 +54,10 @@ public class User extends RepresentationModel<User> implements UserDetails {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ENTERPRISE")
 	private Enterprise enterprise;
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private Set<History> histories;
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Reservation> reservations;
 

@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping(value = "/clients")
 public class ClientController {

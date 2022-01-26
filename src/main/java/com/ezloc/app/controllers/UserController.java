@@ -22,6 +22,7 @@ import java.util.Optional;
 import static com.ezloc.app.config.Constants.ENTERPRISE;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -38,7 +39,7 @@ public class UserController {
         this.historyService = historyService;
     }
 
-    @GetMapping
+    @GetMapping(value="/all")
     public CollectionModel<User> findAll() {
         List<User> allUsers = userService.findAll();
         for (User user : allUsers) {
@@ -79,8 +80,8 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/{username}")
-    public ResponseEntity<Object> findByUsername(@PathVariable("username") String username) {
+    @GetMapping
+    public ResponseEntity<Object> findByUsername(@RequestParam(value="username") String username) {
 
         Optional<User> user = Optional.of(userService.findByusername(username));
 
