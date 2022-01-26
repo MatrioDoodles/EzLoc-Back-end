@@ -5,9 +5,6 @@ import com.ezloc.app.entities.*;
 import com.ezloc.app.services.*;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -44,17 +40,8 @@ public class EnterpriseController {
     }
 
     @GetMapping
-    public CollectionModel<Enterprise> findAll() {
-        List<Enterprise> allEnterprises = enterpriseService.findAll();
-        for (Enterprise enterprise : allEnterprises) {
-            Long enterpriseId = enterprise.getId();
-            Link selfLink = linkTo(EnterpriseController.class).slash(enterpriseId).withSelfRel();
-            enterprise.add(selfLink);
-        }
-
-
-        Link link = linkTo(EnterpriseController.class).withSelfRel();
-        return CollectionModel.of(allEnterprises, link);
+    public List<Enterprise> findAll() {
+        return enterpriseService.findAll();
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
@@ -63,9 +50,7 @@ public class EnterpriseController {
 
         if(enterprise.isPresent()) {
             Enterprise resource = enterprise.get();
-            Link selfLink = linkTo(EnterpriseController.class).slash(id).withSelfRel();
-            EntityModel<Enterprise> result = EntityModel.of(resource,selfLink);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.ENTERPRISE_NOT_FOUND);

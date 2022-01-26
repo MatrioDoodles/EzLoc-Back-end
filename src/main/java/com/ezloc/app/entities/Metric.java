@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Metric extends RepresentationModel<Metric> {
+public class Metric{
     @Id
     @SequenceGenerator(name = "metric_sequence",sequenceName = "metric_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "metric_sequence")

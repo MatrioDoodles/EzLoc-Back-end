@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class History extends RepresentationModel<History> {
+public class History{
 
     @Id
     @SequenceGenerator(name = "history_sequence",sequenceName = "history_sequence",allocationSize = 1)

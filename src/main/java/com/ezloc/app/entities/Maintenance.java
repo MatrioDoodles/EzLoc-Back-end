@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Maintenance extends RepresentationModel<Maintenance> {
+public class Maintenance {
     @Id
     @SequenceGenerator(name = "maintenance_sequence",sequenceName = "maintenance_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "maintenance_sequence")

@@ -5,9 +5,6 @@ import com.ezloc.app.entities.History;
 import com.ezloc.app.services.HistoryService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -29,21 +25,9 @@ public class HistoryController {
     }
 
     @GetMapping
-    public CollectionModel<History> findAll() {
-        List<History> allHistorys = HistoryService.findAll();
-        for (History History : allHistorys) {
-            Long HistoryId = History.getId();
-            Link selfLink = linkTo(HistoryController.class).slash(HistoryId).withSelfRel();
-            History.add(selfLink);
-            if(History.getUser()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(History.getUser().getId()).withRel("User");
-                History.add(enterpriseLink);}
-        }
+    public List<History> findAll() {
 
-
-        Link link = linkTo(HistoryController.class).withSelfRel();
-        CollectionModel<History> result = CollectionModel.of(allHistorys, link);
-        return result;
+        return HistoryService.findAll();
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
@@ -52,12 +36,7 @@ public class HistoryController {
 
         if(History.isPresent()) {
             History resource = History.get();
-            Link selfLink = linkTo(HistoryController.class).slash(id).withSelfRel();
-            EntityModel<History> result = EntityModel.of(resource,selfLink);
-            if(resource.getUser()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getUser().getId()).withRel("User");
-                resource.add(enterpriseLink);}
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.HISTORY_NOT_FOUND);

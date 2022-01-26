@@ -5,9 +5,6 @@ import com.ezloc.app.entities.Metric;
 import com.ezloc.app.services.MetricService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -29,21 +25,9 @@ public class MetricController {
     }
 
     @GetMapping
-    public CollectionModel<Metric> findAll() {
-        List<Metric> allMetrics = MetricService.findAll();
-        for (Metric Metric : allMetrics) {
-            Long MetricId = Metric.getId();
-            Link selfLink = linkTo(MetricController.class).slash(MetricId).withSelfRel();
-            Metric.add(selfLink);
-            if(Metric.getEnterprise()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(Metric.getEnterprise().getId()).withRel("Enterprise");
-                Metric.add(enterpriseLink);}
-        }
+    public List<Metric> findAll() {
 
-
-        Link link = linkTo(MetricController.class).withSelfRel();
-        CollectionModel<Metric> result = CollectionModel.of(allMetrics, link);
-        return result;
+        return MetricService.findAll();
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
@@ -52,12 +36,7 @@ public class MetricController {
 
         if(Metric.isPresent()) {
             Metric resource = Metric.get();
-            Link selfLink = linkTo(MetricController.class).slash(id).withSelfRel();
-            EntityModel<Metric> result = EntityModel.of(resource,selfLink);
-            if(resource.getEnterprise()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
-                resource.add(enterpriseLink);}
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.METRIC_NOT_FOUND);

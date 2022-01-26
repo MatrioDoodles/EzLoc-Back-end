@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Contract extends RepresentationModel<Contract> {
+public class Contract{
     @Id
     @SequenceGenerator(name = "contract_sequence",sequenceName = "contract_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "contract_sequence")

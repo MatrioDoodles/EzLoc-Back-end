@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Settings extends RepresentationModel<Settings> {
+public class Settings{
     @Id
     @SequenceGenerator(name = "settings_sequence",sequenceName = "settings_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "settings_sequence")

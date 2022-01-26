@@ -17,7 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Role extends RepresentationModel<Role> {
+public class Role{
 
 	private static final long serialVersionUID = 1600809193487331066L;
 	@Id

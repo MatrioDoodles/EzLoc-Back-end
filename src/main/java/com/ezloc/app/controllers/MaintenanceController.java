@@ -5,9 +5,6 @@ import com.ezloc.app.entities.Maintenance;
 import com.ezloc.app.services.MaintenanceService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -29,18 +25,9 @@ public class MaintenanceController {
     }
 
     @GetMapping
-    public CollectionModel<Maintenance> findAll() {
-        List<Maintenance> allMaintenances = MaintenanceService.findAll();
-        for (Maintenance Maintenance : allMaintenances) {
-            Long MaintenanceId = Maintenance.getId();
-            Link selfLink = linkTo(MaintenanceController.class).slash(MaintenanceId).withSelfRel();
-            Maintenance.add(selfLink);
-        }
+    public List<Maintenance> findAll() {
 
-
-        Link link = linkTo(MaintenanceController.class).withSelfRel();
-        CollectionModel<Maintenance> result = CollectionModel.of(allMaintenances, link);
-        return result;
+        return MaintenanceService.findAll();
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
@@ -49,9 +36,7 @@ public class MaintenanceController {
 
         if(Maintenance.isPresent()) {
             Maintenance resource = Maintenance.get();
-            Link selfLink = linkTo(MaintenanceController.class).slash(id).withSelfRel();
-            EntityModel<Maintenance> result = EntityModel.of(resource,selfLink);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.MAINTENANCE_NOT_FOUND);

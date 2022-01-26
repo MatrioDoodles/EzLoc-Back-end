@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Client extends RepresentationModel<Client>{
+public class Client{
     @Id
     @SequenceGenerator(name = "client_sequence",sequenceName = "client_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_sequence")

@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Invoice extends RepresentationModel<Invoice> {
+public class Invoice{
     @Id
     @SequenceGenerator(name = "invoice_sequence",sequenceName = "invoice_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "invoice_sequence")

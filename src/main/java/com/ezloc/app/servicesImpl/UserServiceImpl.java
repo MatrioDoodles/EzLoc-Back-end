@@ -29,9 +29,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Optional<User> add(Optional<User> user) {
+        System.out.println(user.get().toString());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.get().setPassword(encoder.encode(user.get().getPassword()));
-        return Optional.of(userRepository.save(user.get()));
+        User resource = user.get();
+        String endodedpassword = encoder.encode(resource.getPassword());
+        resource.setPassword(endodedpassword);
+        return Optional.of(userRepository.save(resource));
     }
 
     @Override
@@ -50,9 +53,7 @@ public class UserServiceImpl implements UserService {
         resource.setPhone(Optional.ofNullable(user).map(c->c.get().getPhone()).orElse(resource.getPhone()));
         resource.setAdress(Optional.ofNullable(user).map(c->c.get().getAdress()).orElse(resource.getAdress()));
         resource.setUsername(Optional.ofNullable(user).map(c->c.get().getUsername()).orElse(resource.getUsername()));
-       /* if(resource.getPassword() != null) {
-            resource.setPassword(Optional.ofNullable(user).map(c -> encoder.encode(c.get().getPassword())).orElse(resource.getPassword()));
-        }*/
+        //resource.setPassword(Optional.ofNullable(user).map(c -> encoder.encode(c.get().getPassword())).orElse(resource.getPassword()));
         resource.setCity(Optional.ofNullable(user).map(c->c.get().getCity()).orElse(resource.getCity()));
         resource.setActivated(Optional.ofNullable(user).map(c->c.get().isActivated()).orElse(resource.isActivated()));
         resource.setRole(Optional.ofNullable(user).map(c->c.get().getRole()).orElse(resource.getRole()));

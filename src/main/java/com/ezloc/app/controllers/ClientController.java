@@ -7,9 +7,6 @@ import com.ezloc.app.services.ClientService;
 import com.ezloc.app.services.ReservationService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -34,22 +30,10 @@ public class ClientController {
     }
 
     @GetMapping
-    public CollectionModel<Client> findAll() {
+    public List<Client> findAll() {
         List<Client> allClients = clientService.findAll();
-        for (Client client : allClients) {
-            Long clientId = client.getId();
-            Link selfLink = linkTo(ClientController.class).slash(clientId).withSelfRel();
-            client.add(selfLink);
-            if(client.getEnterprise()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(client.getEnterprise().getId()).withRel("Enterprise");
-                client.add(enterpriseLink);}
 
-        }
-
-
-        Link link = linkTo(ClientController.class).withSelfRel();
-        CollectionModel<Client> result = CollectionModel.of(allClients, link);
-        return result;
+        return allClients;
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
@@ -58,12 +42,7 @@ public class ClientController {
 
         if(client.isPresent()) {
             Client resource = client.get();
-            Link selfLink = linkTo(ClientController.class).slash(id).withSelfRel();
-            EntityModel<Client> result = EntityModel.of(resource,selfLink);
-            if(resource.getEnterprise()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel("Enterprise");
-                result.add(enterpriseLink);}
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.CLIENT_NOT_FOUND);

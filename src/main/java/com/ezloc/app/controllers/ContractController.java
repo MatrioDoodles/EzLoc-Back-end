@@ -5,9 +5,6 @@ import com.ezloc.app.entities.Contract;
 import com.ezloc.app.services.ContractService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -29,17 +25,8 @@ public class ContractController {
     }
 
     @GetMapping
-    public CollectionModel<Contract> findAll() {
-        List<Contract> allContracts = contractService.findAll();
-        for (Contract contract : allContracts) {
-            Long contractId = contract.getId();
-            Link selfLink = linkTo(ContractController.class).slash(contractId).withSelfRel();
-            contract.add(selfLink);
-        }
-
-
-        Link link = linkTo(ContractController.class).withSelfRel();
-        return CollectionModel.of(allContracts, link);
+    public List<Contract> findAll() {
+        return contractService.findAll();
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
@@ -48,9 +35,7 @@ public class ContractController {
 
         if(contract.isPresent()) {
             Contract resource = contract.get();
-            Link selfLink = linkTo(ContractController.class).slash(id).withSelfRel();
-            EntityModel<Contract> result = EntityModel.of(resource,selfLink);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.CONTRACT_NOT_FOUND);

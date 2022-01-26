@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -20,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class User extends RepresentationModel<User> implements UserDetails {
+public class User implements UserDetails {
 
 
 	
@@ -54,10 +55,8 @@ public class User extends RepresentationModel<User> implements UserDetails {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ENTERPRISE")
 	private Enterprise enterprise;
-	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private Set<History> histories;
-	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Reservation> reservations;
 

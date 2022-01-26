@@ -7,11 +7,7 @@ import com.ezloc.app.entities.User;
 import com.ezloc.app.services.HistoryService;
 import com.ezloc.app.services.ReservationService;
 import com.ezloc.app.services.UserService;
-import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static com.ezloc.app.config.Constants.ENTERPRISE;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -40,23 +34,10 @@ public class UserController {
     }
 
     @GetMapping(value="/all")
-    public CollectionModel<User> findAll() {
+    public List<User> findAll() {
         List<User> allUsers = userService.findAll();
-        for (User user : allUsers) {
-            Long userId = user.getId();
-            Link selfLink = linkTo(UserController.class).slash(userId).withSelfRel();
-            user.add(selfLink);
-            if(user.getEnterprise()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(user.getEnterprise().getId()).withRel(ENTERPRISE);
-                user.add(enterpriseLink);}
-            if(user.getRole()!=null)
-            {Link roleLink = linkTo(EnterpriseController.class).slash(user.getRole().getId()).withRel("Role");
-                user.add(roleLink);}
-        }
 
-
-        Link link = linkTo(UserController.class).withSelfRel();
-        return CollectionModel.of(allUsers, link);
+        return allUsers;
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
@@ -65,15 +46,7 @@ public class UserController {
 
         if(user.isPresent()) {
             User resource = user.get();
-            Link selfLink = linkTo(UserController.class).slash(id).withSelfRel();
-            EntityModel<User> result = EntityModel.of(resource,selfLink);
-            if(resource.getEnterprise()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel(ENTERPRISE);
-                result.add(enterpriseLink);}
-            if(resource.getRole()!=null)
-            {Link roleLink = linkTo(EnterpriseController.class).slash(resource.getRole().getId()).withRel("Role");
-                resource.add(roleLink);}
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.USER_NOT_FOUND);
@@ -86,16 +59,7 @@ public class UserController {
         Optional<User> user = Optional.of(userService.findByusername(username));
 
         if(user.isPresent()==true) {
-            User resource = user.get();
-            Link selfLink = linkTo(UserController.class).slash(username).withSelfRel();
-            EntityModel<User> result = EntityModel.of(resource,selfLink);
-            if(resource.getEnterprise()!=null)
-            {Link enterpriseLink = linkTo(EnterpriseController.class).slash(resource.getEnterprise().getId()).withRel(ENTERPRISE);
-                result.add(enterpriseLink);}
-            if(resource.getRole()!=null)
-            {Link roleLink = linkTo(EnterpriseController.class).slash(resource.getRole().getId()).withRel("Role");
-                resource.add(roleLink);}
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(user.get());
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.USER_NOT_FOUND);
@@ -142,7 +106,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Optional<User> create(@RequestBody Optional<User> resource) {
-        Preconditions.checkNotNull(resource,"Populate all infos");
+
         return userService.add(resource);
     }
     @PutMapping(value = "/{id}")

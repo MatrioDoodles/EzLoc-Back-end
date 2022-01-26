@@ -5,9 +5,6 @@ import com.ezloc.app.entities.Formula;
 import com.ezloc.app.services.FormulaService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -30,17 +26,8 @@ public class FormulaController {
     }
 
     @GetMapping
-    public CollectionModel<Formula> findAll() {
-        List<Formula> allFormulas = formulaService.findAll();
-        for (Formula formula : allFormulas) {
-            Long formulaId = formula.getId();
-            Link selfLink = linkTo(FormulaController.class).slash(formulaId).withSelfRel();
-            formula.add(selfLink);
-        }
-
-
-        Link link = linkTo(FormulaController.class).withSelfRel();
-        return CollectionModel.of(allFormulas, link);
+    public List<Formula> findAll() {
+        return formulaService.findAll();
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
@@ -49,9 +36,7 @@ public class FormulaController {
 
         if(formula.isPresent()) {
             Formula resource = formula.get();
-            Link selfLink = linkTo(FormulaController.class).slash(id).withSelfRel();
-            EntityModel<Formula> result = EntityModel.of(resource,selfLink);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.FORMULA_NOT_FOUND);

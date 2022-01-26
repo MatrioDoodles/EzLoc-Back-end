@@ -1,6 +1,7 @@
 package com.ezloc.app.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Car extends RepresentationModel<Car> {
+public class Car {
     @Id
     @SequenceGenerator(name = "car_sequence",sequenceName = "car_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "car_sequence")
@@ -34,6 +35,7 @@ public class Car extends RepresentationModel<Car> {
     private String registration;
     private boolean available;
     private int fiscalPower;
+    @JsonIgnore
     @OneToMany(mappedBy = "car",fetch = FetchType.LAZY)
     private Set<Reservation> reservations= new HashSet<Reservation>();
     @OneToOne(cascade = CascadeType.ALL)

@@ -5,9 +5,6 @@ import com.ezloc.app.entities.Invoice;
 import com.ezloc.app.services.InvoiceService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @CrossOrigin(value = "*")
 @RestController
@@ -29,18 +25,8 @@ public class InvoiceController {
     }
 
     @GetMapping
-    public CollectionModel<Invoice> findAll() {
-        List<Invoice> allInvoices = InvoiceService.findAll();
-        for (Invoice Invoice : allInvoices) {
-            Long InvoiceId = Invoice.getId();
-            Link selfLink = linkTo(InvoiceController.class).slash(InvoiceId).withSelfRel();
-            Invoice.add(selfLink);
-        }
-
-
-        Link link = linkTo(InvoiceController.class).withSelfRel();
-        CollectionModel<Invoice> result = CollectionModel.of(allInvoices, link);
-        return result;
+    public List<Invoice> findAll() {
+        return InvoiceService.findAll();
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
@@ -49,9 +35,7 @@ public class InvoiceController {
 
         if(Invoice.isPresent()) {
             Invoice resource = Invoice.get();
-            Link selfLink = linkTo(InvoiceController.class).slash(id).withSelfRel();
-            EntityModel<Invoice> result = EntityModel.of(resource,selfLink);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.INVOICE_NOT_FOUND);

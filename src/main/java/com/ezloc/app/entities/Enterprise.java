@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Enterprise extends RepresentationModel<Enterprise> {
+public class Enterprise{
     @Id
     @SequenceGenerator(name = "enterprise_sequence",sequenceName = "enterprise_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "enterprise_sequence")
