@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<User> user) {
+    public User update(Long id, Optional<User> user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         User resource = userRepository.getById(id);
         resource.setName(Optional.ofNullable(user).map(c->c.get().getName()).orElse(resource.getName()));
@@ -53,14 +53,22 @@ public class UserServiceImpl implements UserService {
         resource.setPhone(Optional.ofNullable(user).map(c->c.get().getPhone()).orElse(resource.getPhone()));
         resource.setAdress(Optional.ofNullable(user).map(c->c.get().getAdress()).orElse(resource.getAdress()));
         resource.setUsername(Optional.ofNullable(user).map(c->c.get().getUsername()).orElse(resource.getUsername()));
-        //resource.setPassword(Optional.ofNullable(user).map(c -> encoder.encode(c.get().getPassword())).orElse(resource.getPassword()));
+        resource.setPassword(Optional.ofNullable(user).map(c -> encoder.encode(c.get().getPassword())).orElse(resource.getPassword()));
         resource.setCity(Optional.ofNullable(user).map(c->c.get().getCity()).orElse(resource.getCity()));
         resource.setActivated(Optional.ofNullable(user).map(c->c.get().isActivated()).orElse(resource.isActivated()));
         resource.setRole(Optional.ofNullable(user).map(c->c.get().getRole()).orElse(resource.getRole()));
         resource.setEnterprise(Optional.ofNullable(user).map(c->c.get().getEnterprise()).orElse(resource.getEnterprise()));
 
-        userRepository.save(resource);
-        return "User N° "+id+" Updated Successfully";
+
+        return userRepository.save(resource);
+    }
+
+    @Override
+    public User updatePassword(Long id, String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        User resource = userRepository.getById(id);
+        resource.setPassword(encoder.encode(password));
+        return userRepository.save(resource);
     }
 
     @Override
@@ -77,6 +85,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByenterprise_id(Long id) {
-        return userRepository.findByenterprise_id(id);
+        return userRepository.findByEnterprise_id(id);
+    }
+
+    @Override
+    public List<User> findByenterprise_idAndrole_id(Long enterprise_id, Long role_id) {
+        return userRepository.findByEnterprise_idAndRole_id(enterprise_id,role_id);
     }
 }

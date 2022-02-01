@@ -9,8 +9,10 @@ public interface UserService {
     List<User> findAll();
     Optional<User> add(Optional<User> user);
     Optional<User>  findById(long id);
-    String update(Long id,Optional<User> user);
+    User update(Long id,Optional<User> user);
+    User updatePassword(Long id,String password);
     String delete(long id);
     User findByusername(String username);
     List<User> findByenterprise_id(Long id);
+    List<User> findByenterprise_idAndrole_id(Long enterprise_id,Long role_id);
 }

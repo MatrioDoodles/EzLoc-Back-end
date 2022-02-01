@@ -65,6 +65,18 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.USER_NOT_FOUND);
         }
     }
+    @GetMapping(value="passwordChange")
+    public ResponseEntity<Object> passwordChange(@RequestParam(value="id") Long id ,@RequestParam(value="pass") String password) {
+
+        Optional<User> user = userService.findById(id);
+
+        if(user.isPresent()==true) {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.updatePassword(id,password));
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.USER_NOT_FOUND);
+        }
+    }
     @GetMapping(value = "/{id}/reservations")
     public ResponseEntity<Object> findReservationsByUser(@PathVariable("id") Long id) {
 
@@ -110,7 +122,7 @@ public class UserController {
         return userService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<User> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<User> resource) {
 
         Optional<User> user = userService.findById(id);
         if(user.isPresent()) {

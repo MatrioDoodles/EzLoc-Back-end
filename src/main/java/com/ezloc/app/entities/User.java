@@ -40,8 +40,8 @@ public class User implements UserDetails {
 	private String mail;
 	private String phone;
 	private String adress;
+	@Column(name="USERNAME", unique = true)
 	private String username;
-	@JsonIgnore
 	private String password;
 	private String city;
 	private boolean activated;
@@ -55,8 +55,10 @@ public class User implements UserDetails {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ENTERPRISE")
 	private Enterprise enterprise;
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private Set<History> histories;
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Reservation> reservations;
 
