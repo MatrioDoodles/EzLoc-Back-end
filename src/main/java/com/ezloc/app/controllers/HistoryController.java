@@ -49,7 +49,7 @@ public class HistoryController {
         return HistoryService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<History> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<History> resource) {
 
         Optional<History> History = HistoryService.findById(id);
         if(History.isPresent()) {

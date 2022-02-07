@@ -76,7 +76,7 @@ public class CarController {
         return carService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Car> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Car> resource) {
 
         Optional<Car> car = carService.findById(id);
         if(car.isPresent()) {

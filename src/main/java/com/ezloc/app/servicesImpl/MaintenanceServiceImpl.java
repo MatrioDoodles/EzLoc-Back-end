@@ -39,7 +39,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<Maintenance> maintenance) {
+    public Maintenance update(Long id, Optional<Maintenance> maintenance) {
         Maintenance resource = maintenanceRepository.getById(id);
         resource.setAssurance(Optional.ofNullable(maintenance).map(c->c.get().getAssurance()).orElse(resource.getAssurance()));
         resource.setAssuranceEndDate(Optional.ofNullable(maintenance).map(c->c.get().getAssuranceEndDate()).orElse(resource.getAssuranceEndDate()));
@@ -49,8 +49,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         resource.setTechnicalVisit(Optional.ofNullable(maintenance).map(c->c.get().getTechnicalVisit()).orElse(resource.getTechnicalVisit()));
         resource.setVignette(Optional.ofNullable(maintenance).map(c->c.get().getVignette()).orElse(resource.getVignette()));
         resource.setVignettePaid(Optional.ofNullable(maintenance).map(c->c.get().isVignettePaid()).orElse(resource.isVignettePaid()));
-        maintenanceRepository.save(resource);
-        return "Maintenance N° "+id+" Updated Successfully";
+        return  maintenanceRepository.save(resource);
     }
 
     @Override

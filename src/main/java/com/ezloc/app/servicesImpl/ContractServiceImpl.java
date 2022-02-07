@@ -35,15 +35,15 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public String update(Long id, Optional<Contract> contract) {
+    public Contract update(Long id, Optional<Contract> contract) {
         Contract resource = contractRepository.getById(id);
         resource.setCode(Optional.ofNullable(contract).map(c->c.get().getCode()).orElse(resource.getCode()));
         resource.setContractFile(Optional.ofNullable(contract).map(c->c.get().getContractFile()).orElse(resource.getContractFile()));
         resource.setContractFileName(Optional.ofNullable(contract).map(c->c.get().getContractFileName()).orElse(resource.getContractFileName()));
         resource.setDateOfCreation(Optional.ofNullable(contract).map(c->c.get().getDateOfCreation()).orElse(resource.getDateOfCreation()));
 
-        contractRepository.save(resource);
-        return "Contract N° "+id+" updated successfully";
+        return contractRepository.save(resource);
+
     }
 
     @Override

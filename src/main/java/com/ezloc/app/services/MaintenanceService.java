@@ -9,6 +9,6 @@ public interface MaintenanceService {
     List<Maintenance> findAll();
     Optional<Maintenance> add(Optional<Maintenance> maintenance);
     Optional<Maintenance>  findById(long id);
-    String update(Long id,Optional<Maintenance> maintenance);
+    Maintenance update(Long id,Optional<Maintenance> maintenance);
     String delete(long id);
 }

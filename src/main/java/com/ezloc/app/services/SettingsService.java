@@ -9,6 +9,6 @@ public interface SettingsService {
     List<Settings> findAll();
     Optional<Settings> add(Optional<Settings> settings);
     Optional<Settings>  findById(long id);
-    String update(Long id,Optional<Settings> settings);
+    Settings update(Long id,Optional<Settings> settings);
     String delete(long id);
 }

@@ -38,4 +38,7 @@ public class Client{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_ENTERPRISE")
     private Enterprise enterprise;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_AGENCY")
+    private Agency agency;
 }

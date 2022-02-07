@@ -41,7 +41,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public String update(Long id,Optional<Car> car) {
+    public Car update(Long id,Optional<Car> car) {
 
 
             Car resource = carRepository.getById(id);
@@ -60,8 +60,7 @@ public class CarServiceImpl implements CarService {
 
 
 
-            carRepository.save(resource);
-            return "Car N "+id+" updated successfully";
+        return carRepository.save(resource);
 
     }
 

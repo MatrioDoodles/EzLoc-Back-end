@@ -10,7 +10,7 @@ public interface ClientService {
     List<Client> findAll();
     Optional<Client> add(Optional<Client> client);
     Optional<Client>  findById(long id);
-    String update(Long id,Optional<Client> client);
+    Client update(Long id,Optional<Client> client);
     String delete(long id);
     List<Client> findByenterprise_id(Long id);
 }

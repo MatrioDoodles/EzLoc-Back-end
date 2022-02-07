@@ -75,7 +75,7 @@ public class ClientController {
         return clientService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Client> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Client> resource) {
 
         Optional<Client> client = clientService.findById(id);
         if(client.isPresent()) {

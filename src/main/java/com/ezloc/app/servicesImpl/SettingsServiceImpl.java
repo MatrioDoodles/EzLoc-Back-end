@@ -38,7 +38,7 @@ public class SettingsServiceImpl implements SettingsService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<Settings> settings) {
+    public Settings update(Long id, Optional<Settings> settings) {
         Settings resource = settingsRepository.getById(id);
         resource.setAcronym(Optional.ofNullable(settings).map(c->c.get().getAcronym()).orElse(resource.getAcronym()));
         resource.setCarPrefix(Optional.ofNullable(settings).map(c->c.get().getCarPrefix()).orElse(resource.getCarPrefix()));
@@ -49,8 +49,7 @@ public class SettingsServiceImpl implements SettingsService {
         resource.setCurrency(Optional.ofNullable(settings).map(c->c.get().getCurrency()).orElse(resource.getCurrency()));
         resource.setTvaValue(Optional.ofNullable(settings).map(c->c.get().getTvaValue()).orElse(resource.getTvaValue()));
         resource.setTva(Optional.ofNullable(settings).map(c->c.get().isTva()).orElse(resource.isTva()));
-        settingsRepository.save(resource);
-        return "Settings N° "+id+" Updated Successfully";
+        return settingsRepository.save(resource);
     }
 
     @Override

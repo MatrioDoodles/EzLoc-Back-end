@@ -39,11 +39,11 @@ public class MetricServiceImpl implements MetricService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<Metric> metric) {
+    public Metric update(Long id, Optional<Metric> metric) {
         Metric resource = metricRepository.getById(id);
         resource.setMertricName(Optional.ofNullable(metric).map(c->c.get().getMertricName()).orElse(resource.getMertricName()));
         resource.setMetric(Optional.ofNullable(metric).map(c->c.get().getMetric()).orElse(resource.getMetric()));
-        return "Metric N° "+id+" Updated Successfully";
+        return metricRepository.save(resource);
     }
 
     @Override

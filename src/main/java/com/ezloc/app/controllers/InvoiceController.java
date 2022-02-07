@@ -48,7 +48,7 @@ public class InvoiceController {
         return InvoiceService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Invoice> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Invoice> resource) {
 
         Optional<Invoice> Invoice = InvoiceService.findById(id);
         if(Invoice.isPresent()) {

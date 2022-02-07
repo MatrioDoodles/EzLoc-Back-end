@@ -29,7 +29,7 @@ public class RoleController {
         return RoleService.findAll();
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity findById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
 
         Optional<Role> Role = RoleService.findById(id);
 
@@ -48,7 +48,7 @@ public class RoleController {
         return RoleService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Role> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Role> resource) {
 
         Optional<Role> Role = RoleService.findById(id);
         if(Role.isPresent()) {

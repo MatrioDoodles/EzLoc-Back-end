@@ -39,15 +39,15 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<Invoice> invoice) {
+    public Invoice update(Long id, Optional<Invoice> invoice) {
         Invoice resource = invoiceRepository.getById(id);
         resource.setCode(Optional.ofNullable(invoice).map(c->c.get().getCode()).orElse(resource.getCode()));
         resource.setCheckoutType(Optional.ofNullable(invoice).map(c->c.get().getCheckoutType()).orElse(resource.getCheckoutType()));
         resource.setPaid(Optional.ofNullable(invoice).map(c->c.get().isPaid()).orElse(resource.isPaid()));
         resource.setInvoiceFile(Optional.ofNullable(invoice).map(c->c.get().getInvoiceFile()).orElse(resource.getInvoiceFile()));
         resource.setInvoiceFileName(Optional.ofNullable(invoice).map(c->c.get().getInvoiceFileName()).orElse(resource.getInvoiceFileName()));
-        invoiceRepository.save(resource);
-        return "Invoice N° "+id+" Updated Successfully";
+        return  invoiceRepository.save(resource);
+
     }
 
     @Override

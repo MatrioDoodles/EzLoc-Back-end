@@ -9,7 +9,7 @@ public interface HistoryService {
     List<History> findAll();
     Optional<History> add(Optional<History> history);
     Optional<History>  findById(long id);
-    String update(Long id,Optional<History> history);
+    History update(Long id,Optional<History> history);
     String delete(long id);
     List<History> findByuser_id(Long Id);
 }

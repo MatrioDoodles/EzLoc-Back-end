@@ -37,7 +37,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
-    public String update(Long id, Optional<Enterprise> enterprise) {
+    public Enterprise update(Long id, Optional<Enterprise> enterprise) {
         Enterprise resource = enterpriseRepository.getById(id);
         resource.setLogo(Optional.ofNullable(enterprise).map(c->c.get().getLogo()).orElse(resource.getLogo()));
         resource.setName(Optional.ofNullable(enterprise).map(c->c.get().getName()).orElse(resource.getName()));
@@ -54,8 +54,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
         resource.setImmatriculation(Optional.ofNullable(enterprise).map(c->c.get().getImmatriculation()).orElse(resource.getImmatriculation()));
 
 
-        enterpriseRepository.save(resource);
-        return "Enterprise N° "+id+" updated successfully";
+        return enterpriseRepository.save(resource);
     }
 
     @Override

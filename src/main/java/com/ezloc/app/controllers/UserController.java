@@ -65,8 +65,8 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.USER_NOT_FOUND);
         }
     }
-    @GetMapping(value="passwordChange")
-    public ResponseEntity<Object> passwordChange(@RequestParam(value="id") Long id ,@RequestParam(value="pass") String password) {
+    @PutMapping(value="/{id}/passwordChange")
+    public ResponseEntity<Object> passwordChange(@PathVariable(value="id") Long id ,@RequestBody String password) {
 
         Optional<User> user = userService.findById(id);
 

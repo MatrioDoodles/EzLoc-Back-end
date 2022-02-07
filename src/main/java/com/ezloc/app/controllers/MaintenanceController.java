@@ -49,7 +49,7 @@ public class MaintenanceController {
         return MaintenanceService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Maintenance> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Maintenance> resource) {
 
         Optional<Maintenance> Maintenance = MaintenanceService.findById(id);
         if(Maintenance.isPresent()) {

@@ -49,7 +49,7 @@ public class FormulaController {
         return formulaService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Formula> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Formula> resource) {
 
         Optional<Formula> formula = formulaService.findById(id);
         if(formula.isPresent()) {

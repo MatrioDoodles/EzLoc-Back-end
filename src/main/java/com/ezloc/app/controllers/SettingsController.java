@@ -29,12 +29,12 @@ public class SettingsController {
         return SettingsService.findAll();
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity findById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
 
-        Optional<Settings> Settings = SettingsService.findById(id);
+        Optional<Settings> settings = SettingsService.findById(id);
 
-        if(Settings.isPresent()) {
-            Settings resource = Settings.get();
+        if(settings.isPresent()) {
+            Settings resource = settings.get();
             return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
         else {
@@ -48,10 +48,10 @@ public class SettingsController {
         return SettingsService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Settings> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Settings> resource) {
 
-        Optional<Settings> Settings = SettingsService.findById(id);
-        if(Settings.isPresent()) {
+        Optional<Settings> settings = SettingsService.findById(id);
+        if(settings.isPresent()) {
 
             return ResponseEntity.status(HttpStatus.OK).body(SettingsService.update(id,resource));
         }
@@ -60,8 +60,8 @@ public class SettingsController {
     }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        Optional<Settings> Settings = SettingsService.findById(id);
-        if(Settings.isPresent()) {
+        Optional<Settings> settings = SettingsService.findById(id);
+        if(settings.isPresent()) {
 
             return ResponseEntity.status(HttpStatus.OK).body(SettingsService.delete(id));
         }

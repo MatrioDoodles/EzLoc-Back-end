@@ -9,6 +9,6 @@ public interface InvoiceService {
     List<Invoice> findAll();
     Optional<Invoice> add(Optional<Invoice> invoice);
     Optional<Invoice>  findById(long id);
-    String update(Long id,Optional<Invoice> invoice);
+    Invoice update(Long id,Optional<Invoice> invoice);
     String delete(long id);
 }

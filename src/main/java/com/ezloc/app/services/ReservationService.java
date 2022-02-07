@@ -9,7 +9,7 @@ public interface ReservationService {
     List<Reservation> findAll();
     Optional<Reservation> add(Optional<Reservation> reservation);
     Optional<Reservation>  findById(long id);
-    String update(Long id,Optional<Reservation> reservation);
+    Reservation update(Long id,Optional<Reservation> reservation);
     String delete(long id);
     List<Reservation> findBycar_id(Long id);
     List<Reservation> findByclient_id(Long id);

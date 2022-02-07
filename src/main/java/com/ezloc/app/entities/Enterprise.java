@@ -50,4 +50,6 @@ public class Enterprise{
     private Formula formula;
     @OneToMany(mappedBy = "enterprise", fetch = FetchType.LAZY)
     private Set<Reservation> reservations;
+    @OneToMany(mappedBy = "enterprise")
+    private Set<Agency> agencies;
 }

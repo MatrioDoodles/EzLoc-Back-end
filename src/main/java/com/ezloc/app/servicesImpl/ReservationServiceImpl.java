@@ -39,7 +39,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<Reservation> reservation) {
+    public Reservation update(Long id, Optional<Reservation> reservation) {
         Reservation resource = reservationRepository.getById(id);
         resource.setCode(Optional.ofNullable(reservation).map(c->c.get().getCode()).orElse(resource.getCode()));
         resource.setReservationDate(Optional.ofNullable(reservation).map(c->c.get().getReservationDate()).orElse(resource.getReservationDate()));
@@ -61,8 +61,7 @@ public class ReservationServiceImpl implements ReservationService {
         resource.setCheckoutType(Optional.ofNullable(reservation).map(c->c.get().getCheckoutType()).orElse(resource.getCheckoutType()));
         resource.setCheckNumber(Optional.ofNullable(reservation).map(c->c.get().getCheckNumber()).orElse(resource.getCheckNumber()));
         resource.setCommentary(Optional.ofNullable(reservation).map(c->c.get().getCommentary()).orElse(resource.getCommentary()));
-        reservationRepository.save(resource);
-        return "Reservation N°"+id+" Updated Successfully";
+        return reservationRepository.save(resource);
     }
 
     @Override

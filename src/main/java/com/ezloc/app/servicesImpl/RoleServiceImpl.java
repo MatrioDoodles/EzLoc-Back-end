@@ -40,10 +40,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<Role> role) {
+    public Role update(Long id, Optional<Role> role) {
         Role resource = roleRepository.getById(id);
         resource.setLabel(Optional.ofNullable(role).map(c->c.get().getLabel()).orElse(resource.getLabel()));
-        return "Role N° "+id+" Updated Successfully";
+        return roleRepository.save(resource);
     }
 
     @Override

@@ -48,7 +48,7 @@ public class ContractController {
         return contractService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Contract> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Contract> resource) {
 
         Optional<Contract> contract = contractService.findById(id);
         if(contract.isPresent()) {

@@ -30,12 +30,12 @@ public class ReservationController {
         return ReservationService.findAll();
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity findById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
 
-        Optional<Reservation> Reservation = ReservationService.findById(id);
+        Optional<Reservation> reservation = ReservationService.findById(id);
 
-        if(Reservation.isPresent()) {
-            Reservation resource = Reservation.get();
+        if(reservation.isPresent()) {
+            Reservation resource = reservation.get();
 
             return ResponseEntity.status(HttpStatus.OK).body(resource);
         }
@@ -50,10 +50,10 @@ public class ReservationController {
         return ReservationService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Reservation> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Reservation> resource) {
 
-        Optional<Reservation> Reservation = ReservationService.findById(id);
-        if(Reservation.isPresent()) {
+        Optional<Reservation> reservation = ReservationService.findById(id);
+        if(reservation.isPresent()) {
 
             return ResponseEntity.status(HttpStatus.OK).body(ReservationService.update(id,resource));
         }
@@ -62,8 +62,8 @@ public class ReservationController {
     }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        Optional<Reservation> Reservation = ReservationService.findById(id);
-        if(Reservation.isPresent()) {
+        Optional<Reservation> reservation = ReservationService.findById(id);
+        if(reservation.isPresent()) {
 
             return ResponseEntity.status(HttpStatus.OK).body(ReservationService.delete(id));
         }

@@ -159,7 +159,7 @@ public class EnterpriseController {
         return enterpriseService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Enterprise> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Enterprise> resource) {
 
         Optional<Enterprise> enterprise = enterpriseService.findById(id);
         if(enterprise.isPresent()) {

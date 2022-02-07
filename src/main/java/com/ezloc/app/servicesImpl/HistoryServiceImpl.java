@@ -37,7 +37,7 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
-    public String update(Long id, Optional<History> history) {
+    public History update(Long id, Optional<History> history) {
         History resource = historyRepository.getById(id);
         resource.setEntity(Optional.ofNullable(history).map(c->c.get().getEntity()).orElse(resource.getEntity()));
         resource.setAction(Optional.ofNullable(history).map(c->c.get().getAction()).orElse(resource.getAction()));
@@ -45,8 +45,7 @@ public class HistoryServiceImpl implements HistoryService {
         resource.setSeen(Optional.ofNullable(history).map(c->c.get().isSeen()).orElse(resource.isSeen()));
         resource.setSeenFromNotificationZone(Optional.ofNullable(history).map(c->c.get().isSeenFromNotificationZone()).orElse(resource.isSeenFromNotificationZone()));
 
-        historyRepository.save(resource);
-        return "Car N "+id+" updated successfully";
+        return historyRepository.save(resource);
     }
 
     @Override

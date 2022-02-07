@@ -9,6 +9,6 @@ public interface EnterpriseService {
     List<Enterprise> findAll();
     Optional<Enterprise> add(Optional<Enterprise> enterprise);
     Optional<Enterprise>  findById(long id);
-    String update(Long id,Optional<Enterprise> enterprise);
+    Enterprise update(Long id,Optional<Enterprise> enterprise);
     String delete(long id);
 }

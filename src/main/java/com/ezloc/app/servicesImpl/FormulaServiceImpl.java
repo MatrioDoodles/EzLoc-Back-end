@@ -38,7 +38,7 @@ public class FormulaServiceImpl implements FormulaService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<Formula> formula) {
+    public Formula update(Long id, Optional<Formula> formula) {
         return null;
     }
 

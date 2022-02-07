@@ -49,7 +49,7 @@ public class MetricController {
         return MetricService.add(resource);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Optional<Metric> resource) {
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Optional<Metric> resource) {
 
         Optional<Metric> Metric = MetricService.findById(id);
         if(Metric.isPresent()) {

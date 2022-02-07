@@ -9,6 +9,6 @@ public interface RoleService {
     List<Role> findAll();
     Optional<Role> add(Optional<Role> role);
     Optional<Role>  findById(long id);
-    String update(Long id,Optional<Role> role);
+    Role update(Long id,Optional<Role> role);
     String delete(long id);
 }

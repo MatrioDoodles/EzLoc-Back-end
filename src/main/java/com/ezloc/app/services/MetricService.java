@@ -9,7 +9,7 @@ public interface MetricService {
     List<Metric> findAll();
     Optional<Metric> add(Optional<Metric> metric);
     Optional<Metric>  findById(long id);
-    String update(Long id,Optional<Metric> metric);
+    Metric update(Long id,Optional<Metric> metric);
     String delete(long id);
     List<Metric> findByenterprise_id(Long id);
 }

@@ -38,7 +38,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Transactional
-    public String update(Long id, Optional<Client> client) {
+    public Client update(Long id, Optional<Client> client) {
         Client resource = clientRepository.getById(id);
         resource.setAdress(Optional.ofNullable(client).map(c->c.get().getAdress()).orElse(resource.getAdress()));
         resource.setLicense(Optional.ofNullable(client).map(c->c.get().getLicense()).orElse(resource.getLicense()));
@@ -51,8 +51,8 @@ public class ClientServiceImpl implements ClientService {
         resource.setPassport(Optional.ofNullable(client).map(c->c.get().getPassport()).orElse(resource.getPassport()));
         resource.setRib(Optional.ofNullable(client).map(c->c.get().getRib()).orElse(resource.getRib()));
         resource.setBlacklisted(Optional.ofNullable(client).map(c->c.get().isBlacklisted()).orElse(resource.isBlacklisted()));
-        clientRepository.save(resource);
-        return "Client N° "+id+" updated successfully";
+        return clientRepository.save(resource);
+
     }
 
     @Override

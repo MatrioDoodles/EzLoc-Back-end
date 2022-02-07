@@ -9,6 +9,6 @@ public interface ContractService {
     List<Contract> findAll();
     Optional<Contract> add(Optional<Contract> contract);
     Optional<Contract>  findById(long id);
-    String update(Long id,Optional<Contract> contract);
+    Contract update(Long id,Optional<Contract> contract);
     String delete(long id);
 }
