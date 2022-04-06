@@ -26,6 +26,7 @@ public class Maintenance {
     private Long oilChangeKm;
     private Long lastMileage;
     private LocalDate technicalVisit ;
+    private boolean technicalVisitDone ;
     private LocalDate vignette;
     private boolean  vignettePaid;
     private boolean  assurancePaid;

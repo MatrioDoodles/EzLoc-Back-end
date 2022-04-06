@@ -23,12 +23,9 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "car_sequence")
     @Column(name="ID_CAR", unique = true)
     private Long id;
-    private String constructor;
-    private String model;
     private String color;
     private String year;
     private String category;
-    private String trim;
     private String fuel;
     private Long mileage;
     private String gearbox;
@@ -47,4 +44,13 @@ public class Car {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_AGENCY")
     private Agency agency;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_CONSTRUCTOR")
+    private ConstructorName constructorName;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_TRIM")
+    private Trim trim;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_MODEL")
+    private Model model;
 }

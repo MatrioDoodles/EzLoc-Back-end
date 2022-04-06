@@ -27,7 +27,7 @@ public class Agency {
     private String landLineNumber;
     private String fax;
     private String adress;
-    private boolean primary;
+    private boolean primaire;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_ENTERPRISE")

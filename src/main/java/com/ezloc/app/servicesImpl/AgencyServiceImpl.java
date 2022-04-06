@@ -48,7 +48,7 @@ public class AgencyServiceImpl implements AgencyService {
         resource.setLandLineNumber(Optional.ofNullable(agency).map(c->c.get().getLandLineNumber()).orElse(resource.getLandLineNumber()));
         resource.setName(Optional.ofNullable(agency).map(c->c.get().getName()).orElse(resource.getName()));
         resource.setEnterprise(Optional.ofNullable(agency).map(c->c.get().getEnterprise()).orElse(resource.getEnterprise()));
-        resource.setPrimary(Optional.ofNullable(agency).map(c->c.get().isPrimary()).orElse(resource.isPrimary()));
+        resource.setPrimaire(Optional.ofNullable(agency).map(c->c.get().isPrimaire()).orElse(resource.isPrimaire()));
         resource.setPhone(Optional.ofNullable(agency).map(c->c.get().getPhone()).orElse(resource.getPhone()));
 
         return agencyRepository.save(resource);

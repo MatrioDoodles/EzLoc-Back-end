@@ -45,7 +45,7 @@ public class CarServiceImpl implements CarService {
 
 
             Car resource = carRepository.getById(id);
-            resource.setConstructor(Optional.ofNullable(car).map(c->c.get().getConstructor()).orElse(resource.getConstructor()));
+            resource.setConstructorName(Optional.ofNullable(car).map(c->c.get().getConstructorName()).orElse(resource.getConstructorName()));
             resource.setModel(Optional.ofNullable(car).map(c->c.get().getModel()).orElse(resource.getModel()));
             resource.setColor(Optional.ofNullable(car).map(c->c.get().getColor()).orElse(resource.getColor()));
             resource.setYear(Optional.ofNullable(car).map(c->c.get().getYear()).orElse(resource.getYear()));
