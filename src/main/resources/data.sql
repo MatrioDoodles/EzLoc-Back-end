@@ -79,7 +79,7 @@ INSERT IGNORE INTO model (ID_MODEL,LABEL,ID_CONSTRUCTOR) values
 (208,"508",21),(209,"Bipper",21),(210,"Boxer",21),(211,"Expert",21),(212,"Landtrek",21),(213,"Partner",21),
 (214,"Rifter",21),(215,"Traveller",21),
 #PORSCHE
-(216,"718 Boxter",22),(217,"718 Cayman",22),(218,"911",22),(219,"Cayenne",22),(220,"Cayenne Coupé",22),
+(216,"718 Boxter",22),(217,"718 Cayman",22),(218,"911",22),(311,"911 Targa",22),(219,"Cayenne",22),(220,"Cayenne Coupé",22),
 (221,"Macan",22),(222,"Panamera",22),(223,"Taycan",22),
 #SEAT
 (224,"Arona",23),(225,"Ateca",23),(226,"Leon",23),(227,"Ibiza",23),(228,"Mii",23),
@@ -133,73 +133,74 @@ INSERT IGNORE INTO trim (ID_TRIM,LABEL,ID_CONSTRUCTOR) values
 #RENAULT
 (60,"Life",2),(61,"Explore",2),(62,"Intens",2),(63,"RS Line",2),
 #DACIA
-(1,"",3),
-(1,"",3),
-(1,"",3),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
+(64,"Confort",3),(65,"Essentiel",3),(66,"Prestige",3),(67,"Confort",3),
+#AUDI
+(68,"30 TDI",4),(69,"30 TDI Design",4),(70,"30 TDI Premium",4),(71,"30 TDI Sport",4),(72,"30 TDI SLine",4),(73,"35 TDI",4),(74,"35 TDI Design",4),(75,"35 TDI Premium",4),
+(76,"35 TDI Sport",4),(77,"35 TDI SLine",4),(78,"40 TDI Premium",4),(79,"40 TDI Business",4),(80,"40 TDI SLine",4),(81,"45 TDI Quattro Ambassadeur",4),(82,"45 TDI Quattro Business",4),
+(83,"45 TDI Quattro SLine",4),(84,"45 TDI Quattro Prestige",4),(85,"45 TDI Quattro Prestige",4),(86,"50 TDI Quattro SLine",4),(87,"50 TDI Quattro Sport S",4),(88,"RS",4),(89,"TFSI",4),
+#BMW
+(90,"16d Lounge",5),(91,"16d Sport",5),(92,"16d Pack M",5),(93,"18d Lounge",5),(94,"18d Sport",5),(95,"18d Pack M",5),(96,"18i Lounge",5),(97,"18i Sport",5),(98,"18i Pack M",5),
+(99,"20d Lounge",5),(100,"20d Sport",5),(101,"20d Pack M",5),(102,"20i Avantage",5),(103,"20i Modern",5),(104,"20i Luxury",5),(105,"28i Avantage",5),(106,"28i Sport",5),(107,"28i Modern",5),
+(108,"28i Luxury",5),(109,"30i Luxury",5),(110,"30i Sport",5),(111,"30i Pack M",5),(112,"30d Luxury",5),(113,"30d Sport",5),(114,"30d Pack M",5),(115,"30d Avantage",5),(116,"40d Confort Line",5),
+(117,"40d Exclusive Line",5),(118,"40i Confort Line",5),(119,"40i Exclusive Line",5),(120,"35i xDrive Confort",5),(121,"35i xDrive Exclusive",5),(122,"30e Avantage",5),(123,"30e Sport Line",5),
+(124,"30e Exclusive Line",5),(125,"30e Pack M",5),(126,"M50",5),(127,"M",5),(128,"50i Confort Line",5),(129,"50i Exclusive Line",5),
+#NISSAN
+(130,"Visia",6),(131,"Acenta",6),(132,"Tekna",6),(133,"Connecta",6),
+#ROW 2
+#CHEVROLET
+(134,"LS",7),(135,"LT",7),(136,"LTZ",7),
+#CITROEN
+(137,"Feel",8),(138,"Shine",8),
+#FIAT
+(139,"POP",9),(140,"EASY",9),(141,"LOUNGE",9),(142,"CONNECT",9),
+#FORD
+(143,"Connected",10),(144,"Connected plus",10),(145,"Active",10),(146,"ST Line",10),(147,"Trend",10),(148,"Trend plus",10),(149,"Titanium",10),(150,"Titanium X",10),
+#HONDA
+(151,"Confort I-DTEC",11),(152,"Elegance I-DTEC",11),(153,"LXIA I-VTEC",11),(154,"VTIA I-VTEC",11),(155,"Trend I-VTEC",11),
+#HYUNDAI
+(156,"Attractive",12),(157,"Inventive",12),(158,"Seductive",12),(159,"Premium",12),(160,"Prestige",12),(161,"Luxe",12),(162,"Ultimate",12),
+#ROW 4
+#JAGUAR
+(163,"2.0L Diesel Standard",13),(164,"2.0L Diesel S",13),(165,"2.0L Diesel Std SE",13),(166,"2.0L Diesel Std HSE",13),(167,"2.0L Diesel Dynamic S",13),
+(168,"2.0L Essence Standard",13),(169,"2.0L Essence S",13),(170,"5.0L Essence SVR",13),(171,"3.0L Essence Luxe",13),(172,"3.0L Essence Portfolio",13),
+(173,"3.0L Diesel Premium",13),
+#JEEP
+(174,"Longitude",14),(175,"Limited",14),(176,"Sahara",14),(177,"Sport",14),(178,"Rubicon",14),(179,"Night Eagle",14),
+#KIA
+(180,"Active",15),(181,"Active+",15),(182,"GT Line",15),(183,"Executive",15),(184,"Executive+",15),(185,"Motion",15),(186,"Motion+",15),(187,"Design",15),(188,"Design+",15),
+#LAND-ROVER
+(189,"110 S",16),(190,"110 SE",16),(191,"3.0L Diesel S",16),(192,"3.0L Diesel SE",16),(193,"3.0L Essence S",16),(194,"3.0L Essence SE",16),(195,"SD4 HSE",16),
+(196,"Standard",16),(197,"5.0L Essence SVR",16),(198,"2.0L Diesel S",16),(199,"2.0L Diesel SE",16),(200,"Autobiography",16),
+#MASERATI
+(201,"3.0 V6",17),(202,"3.0 V6 D",17),(203,"3.0 V6 S",17),(204,"3.0 V6 S Q4",17),(205,"4.7 V8",17),(206,"4.7 V8 Sport",17),
+(207,"4.7 V8 MC",17),(208,"4.7 V8 MC Stradale",17),(209,"3.8 V8 GTS",17),
+#MAZDA
+(210,"Elegance",18),(211,"Selection",18),(212,"Harmony",18),
+#ROW 4
+#MITSUBISHI
+(213,"Intense",19),(214,"Instyle",19),(215,"Premium",19),
+#OPEL
+(216,"Edition Diesel",20),(217,"Edition Essence",20),(218,"GS Line Diesel",20),(219,"GS Line + Diesel",20),(220,"Elegance",20),
+#PEUGEOT
+(221,"Active",21),(222,"Allure",21),(223,"Gt Line",21),(224,"Access",21),
+#PORSCHE
+(225,"Default",22),(226,"S",22),(227,"Coupé",22),(228,"Cabriolet",22),(229,"Turbo S",22),(230,"GTS",22),(231,"4S",22),
+#SEAT
+(232,"TDI Move",23),(233,"TDI Style",23),(234,"TDI Style+",23),(235,"TDI Urabn+",23),(236,"TDI Xperience",23),(237,"TDI FR",23),(238,"TDI FR+",23),
+(239,"MPI Reference+",23),(240,"MPI Style+",23),(241,"MPI Black&White+",23),(242,"MPI Urban+",23),
+#SKODA
+(243,"Elegance",24),(244,"Style",24),(245,"Business",24),(246,"Elegance",24),(247,"Active",24),(248,"Ambition",24),
+#ROW 5
+#SUZUKI
+(249,"1.5L VTT",25),(250,"1.6L Avantage",25),(251,"1.6L Privilege",25),
+#TOYOTA
+(252,"Dynamic",26),(253,"Dynamic+",26),(254,"Distinctive",26),(255,"Distinctive+",26),
+#VOLSKWAGEN
+(256,"Life",27),(257,"Style",27),(258,"Carat",27),(259,"Elegance",27),(260,"Confort",27),(261,"Atmosphere",27),(262,"R-Line",27),
+#VOLVO
+(1,"",28),
+#ABARTH
+#DS
 (1,"",1),
 (1,"",1),
 (1,"",1),
