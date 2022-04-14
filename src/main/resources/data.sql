@@ -198,55 +198,25 @@ INSERT IGNORE INTO trim (ID_TRIM,LABEL,ID_CONSTRUCTOR) values
 #VOLSKWAGEN
 (256,"Life",27),(257,"Style",27),(258,"Carat",27),(259,"Elegance",27),(260,"Confort",27),(261,"Atmosphere",27),(262,"R-Line",27),
 #VOLVO
-(1,"",28),
+(263,"T4 R-Design",28),(264,"T4 Inscription",28),(265,"T5 R-Design",28),(266,"T5 Inscription",28),(267,"T8 twin engine R-Design",28),
+(268,"T8 twin engine Inscription",28),(269,"D4 Momentum",28),(270,"D5 Momentum",28),(271,"D5 Inscription",28),(272,"D5 R-Design",28),
 #ABARTH
+(273,"Turismo",29),(274,"Competizione",29),
 #DS
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-(1,"",1),
-();
+(275,"Montmartre",30),(276,"Performance Line",30),(277,"Rivoli",30),(278,"Opera",30),
+#ROW 6
+#LEXUS
+(279,"250 H Luxury",31),(280,"250 H Executive",31),(281,"250 H F Sport",31),(282,"300 H Luxury",31),(283,"300 H Executive",31),
+(284,"300 H Business",31),(285,"500 H Luxury",31),(286,"450 H Luxury",31),(287,"450 H Executive",31),(288,"450 H Executive Sport",31),
+#LAMBORGHINI
+(289,"Roadster S",32),(290,"SV",32),(291,"SVJ",32),(292,"Performante",32),(293,"EVO",32),(294,"EVO Spyder",32),(295,"STO",32),(296,"TECNICA",32),
+(297,"Base",32),
+#MINI
+(298,"Oxford",33),(299,"Park Lane",33),(300,"Mayfaire",33),
+#SMART
+(301,"Base",34),
+#TESLA
+(302,"Base",35),(303,"Extended Range",35),
+#FERRARI
+(304,"Aperta",36),(305,"Base",36),(306,"Italia",36),(307,"GTB",36),(308,"Spider",36);
 
