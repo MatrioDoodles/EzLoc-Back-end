@@ -2,7 +2,13 @@ package com.ezloc.app.servicesImpl;
 
 
 import com.ezloc.app.entities.Car;
+import com.ezloc.app.entities.ConstructorName;
+import com.ezloc.app.entities.Model;
+import com.ezloc.app.entities.Trim;
 import com.ezloc.app.repositories.CarRepository;
+import com.ezloc.app.repositories.ConstructorNameRepository;
+import com.ezloc.app.repositories.ModelRepository;
+import com.ezloc.app.repositories.TrimRepository;
 import com.ezloc.app.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +22,16 @@ public class CarServiceImpl implements CarService {
 
 
     private final CarRepository carRepository;
+    private final TrimRepository trimRepository;
+    private final ConstructorNameRepository constructorNameRepository;
+    private final ModelRepository modelRepository;
 
     @Autowired
-    public CarServiceImpl(CarRepository carRepository) {
+    public CarServiceImpl(CarRepository carRepository, TrimRepository trimRepository, ConstructorNameRepository constructorNameRepository, ModelRepository modelRepository) {
         this.carRepository = carRepository;
+        this.trimRepository = trimRepository;
+        this.constructorNameRepository = constructorNameRepository;
+        this.modelRepository = modelRepository;
     }
 
     @Override
@@ -74,5 +86,20 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> findByenterprise_id(Long id) {
         return carRepository.findByenterprise_id(id);
+    }
+
+    @Override
+    public List<ConstructorName> findAllConstructors() {
+        return constructorNameRepository.findAll();
+    }
+
+    @Override
+    public List<Model> findModelsByConstructor(Long id) {
+        return modelRepository.findByconstructorName_id(id);
+    }
+
+    @Override
+    public List<Trim> findTrimsByConstructor(Long id) {
+        return trimRepository.findByconstructorName_id(id);
     }
 }

@@ -2,8 +2,7 @@ package com.ezloc.app.controllers;
 
 
 import com.ezloc.app.config.Constants;
-import com.ezloc.app.entities.Car;
-import com.ezloc.app.entities.Reservation;
+import com.ezloc.app.entities.*;
 import com.ezloc.app.services.CarService;
 import com.ezloc.app.services.ReservationService;
 import com.google.common.base.Preconditions;
@@ -33,8 +32,7 @@ public class CarController {
 
     @GetMapping
     public List<Car> findAll() {
-        List<Car> allCars = carService.findAll();
-     return allCars;
+     return carService.findAll();
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
@@ -49,6 +47,21 @@ public class CarController {
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.CAR_NOT_FOUND);
         }
+    }
+    @GetMapping(value = "/constructors")
+    public List<ConstructorName> getConstructorNames() {
+
+       return carService.findAllConstructors();
+    }
+    @GetMapping(value = "/models/{id}")
+    public List<Model> findModelsByConstructor(@PathVariable("id") Long id) {
+
+        return carService.findModelsByConstructor(id);
+    }
+    @GetMapping(value = "/trims/{id}")
+    public List<Trim> findTrimsByConstructor(@PathVariable("id") Long id) {
+
+        return carService.findTrimsByConstructor(id);
     }
     @GetMapping(value = "/{id}/reservations")
     public ResponseEntity findByReservation(@PathVariable("id") Long id) {

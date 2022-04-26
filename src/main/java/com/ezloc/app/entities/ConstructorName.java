@@ -1,5 +1,6 @@
 package com.ezloc.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,15 +18,18 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class ConstructorName {
     @Id
-    @SequenceGenerator(name = "constructor_sequence",sequenceName = "constructor_sequence",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "constructor_sequence")
+    //@SequenceGenerator(name = "constructor_sequence",sequenceName = "constructor_sequence",allocationSize = 1)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "constructor_sequence")
     @Column(name="ID_CONSTRUCTOR", unique = true)
     private Long id;
     private String label;
+    @JsonIgnore
     @OneToMany(mappedBy = "constructorName")
     private Set<Model> models;
+    @JsonIgnore
     @OneToMany(mappedBy = "constructorName")
     private Set<Trim> trims;
+    @JsonIgnore
     @OneToMany(mappedBy = "constructorName")
     private Set<Car> cars;
 }
